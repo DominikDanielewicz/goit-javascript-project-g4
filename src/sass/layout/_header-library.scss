@@ -1,0 +1,5 @@
+.header-library {
+  @extend .container;
+  @extend .header-home;
+  @include responsive-background-image('../images/hero-library');
+}

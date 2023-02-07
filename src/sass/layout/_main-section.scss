@@ -1,0 +1,7 @@
+.main-section {
+  padding-top: 60px;
+  padding-bottom: 50px;
+  background: $background-color-primary;
+  @include flexbox(row, wrap, center, center);
+  height: calc(100% - (230px + 81px));
+}
