@@ -1,0 +1,30 @@
+.logo {
+  @extend .link;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  &__text {
+    @include media-query(mobile) {
+      display: none;
+    }
+    display: block;
+    @include font(Roboto, 30px, 500, 35px, $font-color-primary);
+    @include transition(color, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+  }
+  &__icon {
+    fill: $icon-color;
+    stroke: $icon-color;
+    stroke-width: 2px;
+    width: 24px;
+    height: 24px;
+    @include transition(stroke, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+  }
+  &:hover &__icon {
+    stroke: $accent-color;
+    @include transition(stroke, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+  }
+  &:hover &__text {
+    color: $accent-color;
+    @include transition(stroke color, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+  }
+}

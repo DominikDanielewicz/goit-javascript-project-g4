@@ -1,0 +1,69 @@
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 41px;
+
+  &__container {
+    position: relative;
+  }
+
+  &__label {
+    display: none;
+  }
+
+  &__input {
+    min-width: 280px;
+    max-width: 336px;
+    height: 20px;
+    padding-bottom: 4px;
+    background: none;
+    border: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px $font-color-primary solid;
+    @include font(Roboto, 14px, 400, 16px, $font-color-primary);
+    @include transition(border-bottom, 0.15s, cubic-bezier(0, 0, 0.2, 1), 0s);
+
+    &:focus,
+    &:hover {
+      outline: none;
+      border-bottom: 1px $accent-color solid;
+      box-shadow: 0px 11px 10px -6px #ff6b0163;
+      @include transition(border-bottom, 0.15s, cubic-bezier(0, 0, 0.2, 1), 0s);
+      @include transition(box-shadow, 0.15s, cubic-bezier(0, 0, 0.2, 1), 0s);
+    }
+
+    &::placeholder {
+      color: $font-color-primary;
+    }
+  }
+
+  &__submit-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    background: none;
+
+    outline: none;
+    &:hover .search-form__submit-icon {
+      stroke: $accent-color;
+      @include transition(stroke, 0.15s, cubic-bezier(0, 0, 0.2, 1), 0s);
+    }
+
+    &:focus .search-form__submit-icon {
+      stroke: $accent-color;
+      @include transition(stroke, 0.15s, cubic-bezier(0, 0, 0.2, 1), 0s);
+    }
+  }
+
+  &__submit-icon {
+    stroke: $font-color-primary;
+    stroke-width: 3px;
+    width: 12px;
+    height: 12px;
+    @include transition(stroke, 0.15s, cubic-bezier(0, 0, 0.2, 1), 0s);
+  }
+}

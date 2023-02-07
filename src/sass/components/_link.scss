@@ -1,0 +1,37 @@
+.link {
+  text-decoration: none;
+  color: inherit;
+  @include transition(color, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+
+  &--active {
+    @extend .link;
+    position: relative;
+    &::after {
+      position: absolute;
+      display: block;
+      content: '';
+      bottom: -3px;
+      left: 1px;
+      width: calc(100% - 1px);
+      height: 3px;
+      background-color: $accent-color;
+    }
+  }
+
+  &:hover {
+    color: $accent-color;
+    @include transition(color, 0.25s, cubic-bezier(0, 0, 0.2, 1), 0s);
+  }
+}
+
+.students-link {
+  @extend .link;
+  text-decoration: underline;
+  text-decoration-thickness: 1 px;
+  @include transition(color text-decoration-thickness, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+  &:hover {
+    color: $accent-color;
+    text-decoration-thickness: 2px;
+    @include transition(color text-decoration-thickness, 0.25s, cubic-bezier(0, 0, 0.2, 1), 0s);
+  }
+}
