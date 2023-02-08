@@ -3,5 +3,5 @@
   padding-bottom: 50px;
   background: $background-color-primary;
   @include flexbox(row, wrap, center, center);
-  height: calc(100% - (230px + 81px));
+  min-height: calc(100vh - (230px + 81px)); // viewport height - (header height + footer height)
 }

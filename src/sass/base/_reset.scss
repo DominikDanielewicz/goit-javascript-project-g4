@@ -1,17 +1,32 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
 
 * {
-  display: block;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
+a,
+img,
+input,
+label,
+textarea {
+  display: block;
+}
+
+li,
+ul {
+  list-style: none;
+}
+
 title {
   display: none;
 }
+
 body {
   font-family: $font-stack;
 }
+
 a {
   text-decoration: none;
   display: inline-block;
