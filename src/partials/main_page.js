@@ -1,5 +1,7 @@
 const filmsGalery = document.querySelector('.gallery__box');
 
+// Zmieniam coś na potrzeby
+
 const APIKEY = 'cd99a2449e6daaffb205ea92bac682a0';
 let page = 1;
 let pages;
