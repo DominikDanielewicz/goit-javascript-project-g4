@@ -1,9 +1,13 @@
 .pagination {
   @extend .container;
-  &__list {
-    @include flexbox(row, nowrap, center, center);
+  @include flexbox(row, nowrap, center, center);
+  gap: 6px;
+  margin-top: 40px;
+  @include media-query(tablet) {
     margin-top: 50px;
-    gap: 10px;
+  }
+  @include media-query(desktop) {
+    margin-top: 50px;
   }
   &__button {
     @include flexbox(row, nowrap, center, center);
@@ -23,17 +27,14 @@
       @include transition(background-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
     }
     @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
-    &--previous {
-      @extend .pagination__button;
-      background-color: $background-color-secondary;
-    }
+    &--previous,
     &--next {
       @extend .pagination__button;
       background-color: $background-color-secondary;
     }
-    &--first {
-      @extend .pagination__button;
-    }
+    &--first,
+    &--before-current,
+    &--after-current,
     &--last {
       @extend .pagination__button;
     }
@@ -59,5 +60,9 @@
   }
   &__placeholder {
     cursor: default;
+    &--before,
+    &--after {
+      @extend .pagination__placeholder;
+    }
   }
 }

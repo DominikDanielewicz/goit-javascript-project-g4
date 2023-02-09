@@ -12,41 +12,19 @@
     </div>
     <!-- added .hidden class for later use in JS, sass/utilities/_visibility.scss -->
     <div class="pagination">
-      <ul class="pagination__list">
-        <li class="pagination__item">
-          <button class="pagination__button--previous">
-            <svg class="pagination__icon--previous"><use href="/src/images/icons.svg#arrow"></use></svg>
-          </button>
-        </li>
-        <li class="pagination__item">
-          <button class="pagination__button--first">1</button>
-        </li>
-        <li class="pagination__item">
-          <span class="pagination__placeholder">&middot&middot&middot</span>
-        </li>
-        <li class="pagination__item">
-          <button class="pagination__button">20</button>
-        </li>
-
-        <li class="pagination__item">
-          <button class="pagination__button--current">21</button>
-        </li>
-
-        <li class="pagination__item">
-          <button class="pagination__button">22</button>
-        </li>
-        <li>
-          <span class="pagination__placeholder">&middot&middot&middot</span>
-        </li>
-        <li class="pagination__item">
-          <button class="pagination__button--last">99</button>
-        </li>
-        <li class="pagination__item">
-          <button class="pagination__button--next">
-            <svg class="pagination__icon--next"><use href="/src/images/icons.svg#arrow"></use></svg>
-          </button>
-        </li>
-      </ul>
+      <button class="pagination__button--previous">
+        <svg class="pagination__icon--previous"><use href="/src/images/icons.svg#arrow"></use></svg>
+      </button>
+      <button class="pagination__button--first">1</button>
+      <span class="pagination__placeholder--before">&middot&middot&middot</span>
+      <button class="pagination__button--before-current">20</button>
+      <button class="pagination__button--current">21</button>
+      <button class="pagination__button--after-current">22</button>
+      <span class="pagination__placeholder--after">&middot&middot&middot</span>
+      <button class="pagination__button--last">99</button>
+      <button class="pagination__button--next">
+        <svg class="pagination__icon--next"><use href="/src/images/icons.svg#arrow"></use></svg>
+      </button>
     </div>
   </section>
 </main>
