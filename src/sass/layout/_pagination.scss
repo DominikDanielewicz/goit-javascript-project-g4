@@ -23,17 +23,14 @@
       @include transition(background-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
     }
     @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
-    &--previous {
-      @extend .pagination__button;
-      background-color: $background-color-secondary;
-    }
+    &--previous,
     &--next {
       @extend .pagination__button;
       background-color: $background-color-secondary;
     }
-    &--first {
-      @extend .pagination__button;
-    }
+    &--first,
+    &--before-current,
+    &--after-current,
     &--last {
       @extend .pagination__button;
     }
@@ -59,5 +56,9 @@
   }
   &__placeholder {
     cursor: default;
+    &--before,
+    &--after {
+      @extend .pagination__placeholder;
+    }
   }
 }
