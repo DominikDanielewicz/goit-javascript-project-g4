@@ -1,9 +1,13 @@
 .pagination {
   @extend .container;
-  &__list {
-    @include flexbox(row, nowrap, center, center);
+  @include flexbox(row, nowrap, center, center);
+  gap: 6px;
+  margin-top: 40px;
+  @include media-query(tablet) {
     margin-top: 50px;
-    gap: 10px;
+  }
+  @include media-query(desktop) {
+    margin-top: 50px;
   }
   &__button {
     @include flexbox(row, nowrap, center, center);
