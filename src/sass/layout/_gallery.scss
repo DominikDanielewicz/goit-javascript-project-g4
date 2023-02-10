@@ -1,6 +1,6 @@
 .gallery {
   @extend .container;
-  @include flexbox(row, wrap, center, center);
+  @include flexbox(column, nowrap, center, center);
   &__box {
     @include media-query(mobile) {
       max-width: 280px;

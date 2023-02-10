@@ -1,0 +1,68 @@
+.pagination {
+  @extend .container;
+  @include flexbox(row, nowrap, center, center);
+  gap: 6px;
+  margin-top: 40px;
+  @include media-query(tablet) {
+    margin-top: 50px;
+  }
+  @include media-query(desktop) {
+    margin-top: 50px;
+  }
+  &__button {
+    @include flexbox(row, nowrap, center, center);
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    @include transition(background-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+    &:hover,
+    &:focus,
+    &:focus-within {
+      outline: none;
+      border: none;
+      background-color: $accent-color;
+      @include transition(background-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+    }
+    @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
+    &--previous,
+    &--next {
+      @extend .pagination__button;
+      background-color: $background-color-secondary;
+    }
+    &--first,
+    &--before-current,
+    &--after-current,
+    &--last {
+      @extend .pagination__button;
+    }
+    &--current {
+      @extend .pagination__button;
+      background-color: $accent-color;
+      color: $font-color-primary;
+    }
+  }
+  &__icon {
+    width: 16px;
+    height: 16px;
+    stroke: $font-color-secondary;
+    stroke-width: 2px;
+    fill: $font-color-secondary;
+    &--previous {
+      @extend .pagination__icon;
+    }
+    &--next {
+      @extend .pagination__icon;
+      transform: rotate(180deg);
+    }
+  }
+  &__placeholder {
+    cursor: default;
+    &--before,
+    &--after {
+      @extend .pagination__placeholder;
+    }
+  }
+}

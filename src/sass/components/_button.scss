@@ -10,6 +10,7 @@
   &:focus-within {
     background-color: $accent-color;
     border-color: $accent-color;
+    color: $font-color-primary;
     box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
     @include transition(background-color border-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
   }
@@ -17,6 +18,7 @@
     @extend .button;
     background-color: $accent-color;
     border-color: $accent-color;
+    color: $font-color-primary;
     box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
     @include transition(background-color border-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
   }
