@@ -4,7 +4,15 @@
   padding-top: 41px;
   padding-bottom: 97px;
   height: 230px;
-  @include responsive-background-image('../images/hero-main');
+  @include media-query(mobile) {
+    @include responsive-background-image('../images/hero-home-mobile');
+  }
+  @include media-query(tablet) {
+    @include responsive-background-image('../images/hero-home-tablet');
+  }
+  @include media-query(desktop) {
+    @include responsive-background-image('../images/hero-home-desktop');
+  }
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
