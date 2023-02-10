@@ -1,11 +1,11 @@
-import { closeModal, showModal } from "./movie-details-modal";
+import { closeModal, showModal } from './movie-details-modal';
 const filmsGalery = document.querySelector('.gallery__box');
 
 // Zmieniam coś na potrzeby
 
 const APIKEY = 'cd99a2449e6daaffb205ea92bac682a0';
 let page = 1;
-let pages;
+let totalPages;
 
 const { log } = console;
 
@@ -25,10 +25,11 @@ const trandingFilms = () => {
     https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}&page=${page}`;
 
   fetchFilms(link).then(res => {
-    pages = res.total_pages;
+    totalPages = res.total_pages;
     let films = res.results;
 
     createFilmsGalery(films);
+    element(totalPages, page);
   });
 };
 
@@ -38,8 +39,8 @@ trandingFilms();
 // This function creates elements in .gallery_box
 
 const createFilmsGalery = elem => {
+  filmsGalery.innerHTML = '';
   elem.map(async film => {
-    log('im film', film);
     let name = film.title;
     let poster = film.poster_path;
     let filmId = film.id;
@@ -68,7 +69,6 @@ const getGenres = async id => {
   link = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
   let gen;
   await fetchFilms(link).then(res => {
-    log(res.genres);
     gen = res.genres
       .slice(0, 2)
       .map(ele => ele.name)
@@ -77,14 +77,97 @@ const getGenres = async id => {
   return gen;
 };
 
+// Pagination
+
+const paginationList = document.querySelector('.pagination');
+paginationList.innerHTML = '';
+function element(totalPages, page) {
+  let liTag = '';
+  let beforePage = page - 1;
+  let afterPage = page + 1;
+  let activeLi;
+  if (page > 1) {
+    liTag += `<li><span class="prev pagination__button--previous">Prev</span></li>`;
+  }
+  if (page > 2) {
+    liTag += `<li><button class="pagination__button--first" type="button" data-page="1">1</button></li>`;
+    if (page > 3) {
+      liTag += `<li><span class="dots pagination__placeholder--before">...</span></li>`;
+    }
+  }
+
+  if (page == totalPages) {
+    beforePage = beforePage - 2;
+  } else if (page == totalPages - 1) {
+    beforePage = beforePage - 1;
+  }
+  if (page == totalPages) {
+    afterPage = afterPage + 2;
+  } else if (page == totalPages + 1) {
+    afterPage = afterPage + 1;
+  }
+
+  for (let pageLength = beforePage; pageLength <= afterPage; pageLength++) {
+    if (pageLength > totalPages) {
+      continue;
+    }
+    if (pageLength == 0) {
+      pageLength = pageLength + 1;
+    }
+    if (page == pageLength) {
+      activeLi = 'pagination__button--current';
+    } else {
+      activeLi = '';
+    }
+    liTag += `<li><button class="${activeLi} pagination__button--before-current" type="button" data-page="${pageLength}">${pageLength}</button></li>`;
+  }
+  if (page < totalPages - 1) {
+    if (page < totalPages - 2) {
+      liTag += `<li><span class="dots pagination__placeholder--before">...</span></li>`;
+    }
+    liTag += `<li><button class="pagination__button--before-current" type="button" data-page="${totalPages}">${totalPages}</button></li>`;
+  }
+
+  if (page < totalPages) {
+    liTag += `<li><span class="next pagination__button--next">Next</span></li>`;
+  }
+
+  paginationList.innerHTML = liTag;
+}
+
+const chceckBttn = e => {
+  const prev = document.querySelector('.prev');
+  const next = document.querySelector('.next');
+
+  if (e.target === prev) {
+    page--;
+    console.log('prev', page);
+    trandingFilms();
+    // element(totalPages, page);
+  }
+  if (e.target === next) {
+    page++;
+    console.log('next', page);
+    trandingFilms();
+    // element(totalPages, page);
+  }
+  if (e.target.type === 'button') {
+    page = Number(e.target.dataset.page);
+    trandingFilms();
+    // element(totalPages, page);
+  }
+};
+paginationList.addEventListener('click', chceckBttn);
+
+// element(totalPages, page);
+
 // Operating the modal window
 
 const filmCards = [...document.querySelectorAll('figure')];
-filmCards.forEach(el =>
-  el.addEventListener('click', showModal));
+filmCards.forEach(el => el.addEventListener('click', showModal));
 
-const closeModalBtn = document.getElementsByClassName("movie-details-modal__close-btn")[0];
+const closeModalBtn = document.getElementsByClassName('movie-details-modal__close-btn')[0];
 window.addEventListener('click', closeModal);
 closeModalBtn.addEventListener('click', closeModal);
 
-// 
+//
