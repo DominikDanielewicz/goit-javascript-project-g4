@@ -1,7 +1,6 @@
 import { closeModal, showModal } from './movie-details-modal';
 const filmsGalery = document.querySelector('.gallery__box');
-
-// Zmieniam coś na potrzeby
+const paginationList = document.querySelector('.pagination');
 
 const APIKEY = 'cd99a2449e6daaffb205ea92bac682a0';
 let page = 1;
@@ -29,7 +28,7 @@ const trandingFilms = () => {
     let films = res.results;
 
     createFilmsGalery(films);
-    element(totalPages, page);
+    createButtons(totalPages, page);
   });
 };
 
@@ -46,8 +45,8 @@ const createFilmsGalery = elem => {
     let filmId = film.id;
     let releseDate = film.release_date.slice(0, 4);
 
-    // Because i can't get the genres name from first fetch
-    // i created second fetch from API that use film id to get films details and then i extract genres name from it
+    // Because i can't get the genres names from first fetch
+    // i created second fetch from API that uses film id to get films details and then i extract genres names from it
     let genres = await getGenres(film.id);
 
     const galeryItem = `<figure class="card" data-id="${filmId}">
@@ -62,8 +61,8 @@ const createFilmsGalery = elem => {
   });
 };
 
-// function that use film id from createFilmsGalery function.
-// This function creates details of tranding films but is used for creating genres name.
+// function that uses film id from createFilmsGalery function.
+// This function creates details of tranding films but is used for creating genres names.
 // !!! Can be used for modal window after small changes !!!
 const getGenres = async id => {
   link = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
@@ -79,9 +78,8 @@ const getGenres = async id => {
 
 // Pagination
 
-const paginationList = document.querySelector('.pagination');
 paginationList.innerHTML = '';
-function element(totalPages, page) {
+function createButtons(totalPages, page) {
   let liTag = '';
   let beforePage = page - 1;
   let afterPage = page + 1;
@@ -143,23 +141,18 @@ const chceckBttn = e => {
     page--;
     console.log('prev', page);
     trandingFilms();
-    // element(totalPages, page);
   }
   if (e.target === next) {
     page++;
     console.log('next', page);
     trandingFilms();
-    // element(totalPages, page);
   }
   if (e.target.type === 'button') {
     page = Number(e.target.dataset.page);
     trandingFilms();
-    // element(totalPages, page);
   }
 };
 paginationList.addEventListener('click', chceckBttn);
-
-// element(totalPages, page);
 
 // Operating the modal window
 
