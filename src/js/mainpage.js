@@ -19,7 +19,7 @@ const fetchFilms = link => {
 };
 
 // Main function that loads tranding film on main page
-const trandingFilms = () => {
+const trendingFilms = () => {
   link = `
     https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}&page=${page}`;
 
@@ -33,7 +33,7 @@ const trandingFilms = () => {
 };
 
 // call the function
-trandingFilms();
+trendingFilms();
 
 // This function creates elements in .gallery_box
 
@@ -140,16 +140,15 @@ const chceckBttn = e => {
   if (e.target === prev) {
     page--;
     console.log('prev', page);
-    trandingFilms();
+    trendingFilms();
   }
   if (e.target === next) {
     page++;
-    console.log('next', page);
-    trandingFilms();
+    trendingFilms();
   }
   if (e.target.type === 'button') {
     page = Number(e.target.dataset.page);
-    trandingFilms();
+    trendingFilms();
   }
 };
 paginationList.addEventListener('click', chceckBttn);
