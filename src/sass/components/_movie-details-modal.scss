@@ -1,0 +1,105 @@
+@import '_button';
+@import '_card';
+@import '../utilities/mixins';
+@import '../utilities/variables';
+
+.backdrop {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+}
+
+.movie-details-modal {
+  position: relative;
+    border-radius: 5%;
+  background-color: #fff;
+  margin: auto;
+  padding: 5vh;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15vh;
+
+ @include font($font-stack, 20px, 500, 1.8, $font-color-secondary);
+&__img {
+  background-image: url('../images/img-placeholder.png');
+  background-size: contain;
+  height: 80vh;
+    width: 100%;
+}
+&__close-btn {
+  position: absolute;
+  right: 5vh;
+  top: 5vh;
+  border: none;
+  background-color: inherit;
+  background-image: url('https://www.svgrepo.com/show/365893/x-thin.svg');
+  background-size: contain;
+  width: 50px;
+  height: 50px;
+}
+& h2 {
+  text-transform: uppercase;
+     
+    margin-top: 5vh;
+}
+& h3 {
+      margin: 20px 0;
+    text-transform: uppercase;
+}
+& p {
+  margin: 20px 0;
+}
+&__list {
+ list-style-type: none;
+ display: grid;
+    grid-template-columns: 1fr 1fr;
+} }
+
+.btn-container__watched,
+.btn-container__queue {
+    @extend .button;
+    text-transform: uppercase;
+    color: $font-color-secondary;
+    border-color: $font-color-secondary;
+    background-color: $font-color-primary;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-size: 1.2em;
+    line-height: 27px;
+}
+
+.movie-details-modal__btn-container {
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-gap: 30px;
+margin: 30px 0;
+}
+
+.list {
+  &__headings {
+     color: $modal-accent-color;
+  }
+  &__data {
+    color: $font-color-secondary;
+  }
+  &__btn {
+    @extend .button;
+    padding: 5px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    color: $font-color-secondary;
+    background-color: $background-color-primary;
+  }
+}
+
+
+
