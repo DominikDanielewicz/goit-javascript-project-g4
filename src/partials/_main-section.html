@@ -10,21 +10,32 @@
         </figcaption>
       </figure> -->
     </div>
-    <!-- added .hidden class for later use in JS, sass/utilities/_visibility.scss -->
     <div class="pagination">
-      <button class="pagination__button--previous">
-        <svg class="pagination__icon--previous"><use href="/src/images/icons.svg#arrow"></use></svg>
+      <!-- <button class="pagination__button--arrow-left">
+        <svg class="pagination__icon--arrow-left"><use href="/src/images/icons.svg#arrow"></use></svg>
       </button>
-      <button class="pagination__button--first">1</button>
-      <span class="pagination__placeholder--before">&middot&middot&middot</span>
-      <button class="pagination__button--before-current">20</button>
+      <button class="pagination__button">1</button>
+      <span class="pagination__hidden-results">&middot&middot&middot</span>
+      <button class="pagination__button">20</button>
       <button class="pagination__button--current">21</button>
-      <button class="pagination__button--after-current">22</button>
-      <span class="pagination__placeholder--after">&middot&middot&middot</span>
-      <button class="pagination__button--last">99</button>
-      <button class="pagination__button--next">
-        <svg class="pagination__icon--next"><use href="/src/images/icons.svg#arrow"></use></svg>
-      </button>
+      <button class="pagination__button">22</button>
+      <span class="pagination__hidden-results">&middot&middot&middot</span>
+      <button class="pagination__button">99</button>
+      <button class="pagination__button--arrow-right">
+        <svg class="pagination__icon--arrow-right"><use href="/src/images/icons.svg#arrow"></use></svg>
+      </button> -->
     </div>
   </section>
 </main>
+
+<!--
+  button class description:
+  - pagination__button--arrow-left  // button ze strzalka w lewo
+  - pagination__button--arrow-right // button ze strzalka w prawo
+  - pagination__button--current     // button z aktualna strona
+  - pagination__button              // button na cala reszte listy z numerkami
+  - pagination__hidden-results      // "..." wskazujace na ukryta tresc
+
+  - pagination__icon--arrow-left    // ikona(svg) w lewo
+  - pagination__icon--arrow-right   // ikona(svg) w prawo
+-->
