@@ -9,6 +9,7 @@
   @include media-query(desktop) {
     margin-top: 50px;
   }
+
   &__button {
     @include flexbox(row, nowrap, center, center);
     width: 40px;
@@ -18,6 +19,7 @@
     background: none;
     cursor: pointer;
     @include transition(background-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+    @include font($font-stack, 12px, 500, 16px, $font-color-secondary);
     &:hover,
     &:focus,
     &:focus-within {
@@ -26,43 +28,35 @@
       background-color: $accent-color;
       @include transition(background-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
     }
-    @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
-    &--previous,
-    &--next {
+
+    &--arrow-left,
+    &--arrow-right {
       @extend .pagination__button;
       background-color: $background-color-secondary;
     }
-    &--first,
-    &--before-current,
-    &--after-current,
-    &--last {
-      @extend .pagination__button;
-    }
+
     &--current {
       @extend .pagination__button;
       background-color: $accent-color;
       color: $font-color-primary;
     }
   }
+
   &__icon {
     width: 16px;
     height: 16px;
     stroke: $font-color-secondary;
     stroke-width: 2px;
     fill: $font-color-secondary;
-    &--previous {
+    &--arrow-left {
       @extend .pagination__icon;
     }
-    &--next {
+    &--arrow-right {
       @extend .pagination__icon;
       transform: rotate(180deg);
     }
   }
-  &__placeholder {
+  &__hidden-results {
     cursor: default;
-    &--before,
-    &--after {
-      @extend .pagination__placeholder;
-    }
   }
 }
