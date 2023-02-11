@@ -43,17 +43,33 @@ const createFilmsGalery = elem => {
     let name = film.title;
     let poster = film.poster_path;
     let filmId = film.id;
-    let releseDate = film.release_date.slice(0, 4);
-
+    let releseDate = film.release_date.slice(0, 4) || 'Sorry. No relase date yet.';
+    let other;
+    let newGenres;
     // Because i can't get the genres names from first fetch
     // i created second fetch from API that uses film id to get films details and then i extract genres names from it
     let genres = await getGenres(film.id);
 
+    if (genres.length > 2) {
+      newGenres = genres.slice(0, 2).join(', ');
+      other = ', Other';
+    } else if (genres.length <= 2 && genres.length > 1) {
+      newGenres = genres;
+      other = '';
+      if (genres.length === 2) {
+        newGenres = genres.join(', ');
+        other = '';
+      }
+    } else {
+      newGenres = 'Sorry. No genre added yet.';
+      other = '';
+    }
+
     const galeryItem = `<figure class="card" data-id="${filmId}">
-<img class="card__image" src="https://image.tmdb.org/t/p/original${poster}" alt="${name} movie poster" />
+<img class="card__image" src="https://image.tmdb.org/t/p/w500${poster}" alt="${name} movie poster" />
 <figcaption class="card__caption">
   <p class="card__title">${name}</p>
-  <p class="card__description">${genres}, Other | ${releseDate}</p>
+  <p class="card__description">${newGenres + other} | ${releseDate}</p>
 </figcaption>
 </figure>`;
 
@@ -68,11 +84,9 @@ const getGenres = async id => {
   link = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
   let gen;
   await fetchFilms(link).then(res => {
-    gen = res.genres
-      .slice(0, 2)
-      .map(ele => ele.name)
-      .join(', ');
+    gen = res.genres.map(ele => ele.name);
   });
+
   return gen;
 };
 
