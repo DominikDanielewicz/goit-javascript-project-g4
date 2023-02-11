@@ -85,23 +85,25 @@ function createButtons(totalPages, page) {
   let afterPage = page + 1;
   let activeLi;
   if (page > 1) {
-    liTag += `<li><span class="prev pagination__button--previous">Prev</span></li>`;
+    liTag += `<button class="pagination__button--arrow-left">
+    <svg class="pagination__icon--arrow-left" style="pointer-events: none;"><use href="icons.adfc4680.svg#arrow" style="pointer-events: none;"></use></svg>
+  </button>`;
   }
   if (page > 2) {
-    liTag += `<li><button class="pagination__button--first" type="button" data-page="1">1</button></li>`;
+    liTag += `<button class="pagination__button" type="button" data-page="1">1</button>`;
     if (page > 3) {
-      liTag += `<li><span class="dots pagination__placeholder--before">...</span></li>`;
+      liTag += `<span class="pagination__hidden-results">&middot&middot&middot</span>`;
     }
   }
 
-  if (page == totalPages) {
+  if (page === totalPages) {
     beforePage = beforePage - 2;
-  } else if (page == totalPages - 1) {
+  } else if (page === totalPages - 1) {
     beforePage = beforePage - 1;
   }
-  if (page == totalPages) {
+  if (page === 1) {
     afterPage = afterPage + 2;
-  } else if (page == totalPages + 1) {
+  } else if (page === totalPages + 1) {
     afterPage = afterPage + 1;
   }
 
@@ -109,7 +111,7 @@ function createButtons(totalPages, page) {
     if (pageLength > totalPages) {
       continue;
     }
-    if (pageLength == 0) {
+    if (pageLength === 0) {
       pageLength = pageLength + 1;
     }
     if (page == pageLength) {
@@ -117,29 +119,30 @@ function createButtons(totalPages, page) {
     } else {
       activeLi = '';
     }
-    liTag += `<li><button class="${activeLi} pagination__button--before-current" type="button" data-page="${pageLength}">${pageLength}</button></li>`;
+    liTag += `<button class="${activeLi} pagination__button" type="button" data-page="${pageLength}">${pageLength}</button>`;
   }
   if (page < totalPages - 1) {
     if (page < totalPages - 2) {
-      liTag += `<li><span class="dots pagination__placeholder--before">...</span></li>`;
+      liTag += `<span class="pagination__hidden-results">&middot&middot&middot</span>`;
     }
-    liTag += `<li><button class="pagination__button--before-current" type="button" data-page="${totalPages}">${totalPages}</button></li>`;
+    liTag += `<button class="pagination__button" type="button" data-page="${totalPages}">${totalPages}</button>`;
   }
 
   if (page < totalPages) {
-    liTag += `<li><span class="next pagination__button--next">Next</span></li>`;
+    liTag += `<button class="pagination__button--arrow-right">
+    <svg class="pagination__icon--arrow-right" style="pointer-events: none;"><use href="icons.adfc4680.svg#arrow" style="pointer-events: none;"></use></svg>
+  </button>`;
   }
 
   paginationList.innerHTML = liTag;
 }
 
 const chceckBttn = e => {
-  const prev = document.querySelector('.prev');
-  const next = document.querySelector('.next');
+  const prev = document.querySelector('.pagination__button--arrow-left');
+  const next = document.querySelector('.pagination__button--arrow-right');
 
   if (e.target === prev) {
     page--;
-    console.log('prev', page);
     trendingFilms();
   }
   if (e.target === next) {
