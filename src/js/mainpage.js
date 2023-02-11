@@ -1,11 +1,10 @@
-import { closeModal, showModal } from "./movie-details-modal";
+import { closeModal, showModal } from './movie-details-modal';
 const filmsGalery = document.querySelector('.gallery__box');
-
-// Zmieniam coś na potrzeby
+const paginationList = document.querySelector('.pagination');
 
 const APIKEY = 'cd99a2449e6daaffb205ea92bac682a0';
 let page = 1;
-let pages;
+let totalPages;
 
 const { log } = console;
 
@@ -20,33 +19,34 @@ const fetchFilms = link => {
 };
 
 // Main function that loads tranding film on main page
-const trandingFilms = () => {
+const trendingFilms = () => {
   link = `
     https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}&page=${page}`;
 
   fetchFilms(link).then(res => {
-    pages = res.total_pages;
+    totalPages = res.total_pages;
     let films = res.results;
 
     createFilmsGalery(films);
+    createButtons(totalPages, page);
   });
 };
 
 // call the function
-trandingFilms();
+trendingFilms();
 
 // This function creates elements in .gallery_box
 
 const createFilmsGalery = elem => {
+  filmsGalery.innerHTML = '';
   elem.map(async film => {
-    log('im film', film);
     let name = film.title;
     let poster = film.poster_path;
     let filmId = film.id;
     let releseDate = film.release_date.slice(0, 4);
 
-    // Because i can't get the genres name from first fetch
-    // i created second fetch from API that use film id to get films details and then i extract genres name from it
+    // Because i can't get the genres names from first fetch
+    // i created second fetch from API that uses film id to get films details and then i extract genres names from it
     let genres = await getGenres(film.id);
 
     const galeryItem = `<figure class="card" data-id="${filmId}">
@@ -61,14 +61,13 @@ const createFilmsGalery = elem => {
   });
 };
 
-// function that use film id from createFilmsGalery function.
-// This function creates details of tranding films but is used for creating genres name.
+// function that uses film id from createFilmsGalery function.
+// This function creates details of tranding films but is used for creating genres names.
 // !!! Can be used for modal window after small changes !!!
 const getGenres = async id => {
   link = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
   let gen;
   await fetchFilms(link).then(res => {
-    log(res.genres);
     gen = res.genres
       .slice(0, 2)
       .map(ele => ele.name)
@@ -77,14 +76,90 @@ const getGenres = async id => {
   return gen;
 };
 
+// Pagination
+
+paginationList.innerHTML = '';
+function createButtons(totalPages, page) {
+  let liTag = '';
+  let beforePage = page - 1;
+  let afterPage = page + 1;
+  let activeLi;
+  if (page > 1) {
+    liTag += `<li><span class="prev pagination__button--previous">Prev</span></li>`;
+  }
+  if (page > 2) {
+    liTag += `<li><button class="pagination__button--first" type="button" data-page="1">1</button></li>`;
+    if (page > 3) {
+      liTag += `<li><span class="dots pagination__placeholder--before">...</span></li>`;
+    }
+  }
+
+  if (page == totalPages) {
+    beforePage = beforePage - 2;
+  } else if (page == totalPages - 1) {
+    beforePage = beforePage - 1;
+  }
+  if (page == totalPages) {
+    afterPage = afterPage + 2;
+  } else if (page == totalPages + 1) {
+    afterPage = afterPage + 1;
+  }
+
+  for (let pageLength = beforePage; pageLength <= afterPage; pageLength++) {
+    if (pageLength > totalPages) {
+      continue;
+    }
+    if (pageLength == 0) {
+      pageLength = pageLength + 1;
+    }
+    if (page == pageLength) {
+      activeLi = 'pagination__button--current';
+    } else {
+      activeLi = '';
+    }
+    liTag += `<li><button class="${activeLi} pagination__button--before-current" type="button" data-page="${pageLength}">${pageLength}</button></li>`;
+  }
+  if (page < totalPages - 1) {
+    if (page < totalPages - 2) {
+      liTag += `<li><span class="dots pagination__placeholder--before">...</span></li>`;
+    }
+    liTag += `<li><button class="pagination__button--before-current" type="button" data-page="${totalPages}">${totalPages}</button></li>`;
+  }
+
+  if (page < totalPages) {
+    liTag += `<li><span class="next pagination__button--next">Next</span></li>`;
+  }
+
+  paginationList.innerHTML = liTag;
+}
+
+const chceckBttn = e => {
+  const prev = document.querySelector('.prev');
+  const next = document.querySelector('.next');
+
+  if (e.target === prev) {
+    page--;
+    console.log('prev', page);
+    trendingFilms();
+  }
+  if (e.target === next) {
+    page++;
+    trendingFilms();
+  }
+  if (e.target.type === 'button') {
+    page = Number(e.target.dataset.page);
+    trendingFilms();
+  }
+};
+paginationList.addEventListener('click', chceckBttn);
+
 // Operating the modal window
 
 const filmCards = [...document.querySelectorAll('figure')];
-filmCards.forEach(el =>
-  el.addEventListener('click', showModal));
+filmCards.forEach(el => el.addEventListener('click', showModal));
 
-const closeModalBtn = document.getElementsByClassName("movie-details-modal__close-btn")[0];
+const closeModalBtn = document.getElementsByClassName('movie-details-modal__close-btn')[0];
 window.addEventListener('click', closeModal);
 closeModalBtn.addEventListener('click', closeModal);
 
-// 
+//
