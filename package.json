@@ -5,7 +5,8 @@
   "homepage": "https://dominikdanielewicz.github.io/goit-javascript-project-g4",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-javascript-project-g4/"
+    "build": "parcel build src/*.html --public-url /goit-javascript-project-g4/",
+    "clear-cache": "rm -rf .parcel-cache"
   },
   "repository": {
     "type": "git",
