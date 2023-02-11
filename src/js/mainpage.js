@@ -50,7 +50,7 @@ const createFilmsGalery = elem => {
     let genres = await getGenres(film.id);
 
     const galeryItem = `<figure class="card" data-id="${filmId}">
-<img class="card__image" src="https://image.tmdb.org/t/p/original${poster}" alt="${name} movie poster" />
+<img class="card__image" src="https://image.tmdb.org/t/p/w500${poster}" alt="${name} movie poster" />
 <figcaption class="card__caption">
   <p class="card__title">${name}</p>
   <p class="card__description">${genres}, Other | ${releseDate}</p>
