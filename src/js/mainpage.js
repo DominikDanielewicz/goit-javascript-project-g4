@@ -5,6 +5,7 @@ const paginationList = document.querySelector('.pagination');
 const APIKEY = 'cd99a2449e6daaffb205ea92bac682a0';
 let page = 1;
 let totalPages;
+let link;
 
 const { log } = console;
 
@@ -92,7 +93,6 @@ const getGenres = async id => {
 
 // Pagination
 
-paginationList.innerHTML = '';
 function createButtons(totalPages, page) {
   let liTag = '';
   let beforePage = page - 1;
@@ -100,7 +100,7 @@ function createButtons(totalPages, page) {
   let activeLi;
   if (page > 1) {
     liTag += `<button class="pagination__button--arrow-left">
-    <svg class="pagination__icon--arrow-left" style="pointer-events: none;"><use href="icons.adfc4680.svg#arrow" style="pointer-events: none;"></use></svg>
+    <svg class="pagination__icon--arrow-left" style="pointer-events: none;"><use href="/src/images/icons.svg#arrow"" style="pointer-events: none;"></use></svg>
   </button>`;
   }
   if (page > 2) {
@@ -144,7 +144,7 @@ function createButtons(totalPages, page) {
 
   if (page < totalPages) {
     liTag += `<button class="pagination__button--arrow-right">
-    <svg class="pagination__icon--arrow-right" style="pointer-events: none;"><use href="icons.adfc4680.svg#arrow" style="pointer-events: none;"></use></svg>
+    <svg class="pagination__icon--arrow-right" style="pointer-events: none;"><use href="/src/images/icons.svg#arrow" style="pointer-events: none;"></use></svg>
   </button>`;
   }
 
@@ -178,5 +178,3 @@ filmCards.forEach(el => el.addEventListener('click', showModal));
 const closeModalBtn = document.getElementsByClassName('movie-details-modal__close-btn')[0];
 window.addEventListener('click', closeModal);
 closeModalBtn.addEventListener('click', closeModal);
-
-//
