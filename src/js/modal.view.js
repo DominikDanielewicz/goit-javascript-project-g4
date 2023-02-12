@@ -9,7 +9,7 @@ const baseURL = 'http://image.tmdb.org/t/p/';
 let card = null;
 let movieId = null;
 
-//funkcja fetch z wybranego filmu
+//funkcja fetch z wybranego filmu//
 
 function movieById() {
   createfilmGalery(movieId)
