@@ -1,16 +1,19 @@
+'use strict';
 import { closeModal, showModal } from './movie-details-modal';
-const filmsGalery = document.querySelector('.gallery__box');
+const filmGalery = document.querySelector('.gallery__box');
 const paginationList = document.querySelector('.pagination');
 
 const APIKEY = 'cd99a2449e6daaffb205ea92bac682a0';
 let page = 1;
 let totalPages;
+let link;
+let filmsOnPage;
 
 const { log } = console;
 
 // Fetch films from API
 
-const fetchFilms = link => {
+export const fetchFilms = link => {
   return fetch(link)
     .then(res => {
       return res.json();
@@ -18,16 +21,26 @@ const fetchFilms = link => {
     .catch(error => log(error));
 };
 
+// This function uses the film id to get the details of that film
+// Can be used to make a modal with film details
+export const getFilmDetails = async id => {
+  link = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
+
+  return await fetchFilms(link).then(res => {
+    return res;
+  });
+};
+
 // Main function that loads tranding film on main page
 const trendingFilms = () => {
   link = `
     https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}&page=${page}`;
 
-  fetchFilms(link).then(res => {
+  return fetchFilms(link).then(res => {
     totalPages = res.total_pages;
-    let films = res.results;
+    filmsOnPage = res.results;
 
-    createFilmsGalery(films);
+    createfilmGalery(filmsOnPage);
     createButtons(totalPages, page);
   });
 };
@@ -36,9 +49,11 @@ const trendingFilms = () => {
 trendingFilms();
 
 // This function creates elements in .gallery_box
+// It can be used in other parts of the website,
+// but the html element definded by variable "filmGalery" -const filmGalery = document.querySelector('.gallery__box') must be there
 
-const createFilmsGalery = elem => {
-  filmsGalery.innerHTML = '';
+export const createfilmGalery = elem => {
+  filmGalery.innerHTML = '';
   elem.map(async film => {
     let name = film.title;
     let poster = film.poster_path;
@@ -48,7 +63,7 @@ const createFilmsGalery = elem => {
     let newGenres;
     // Because i can't get the genres names from first fetch
     // i created second fetch from API that uses film id to get films details and then i extract genres names from it
-    let genres = await getGenres(film.id);
+    let genres = await getFilmDetails(film.id).then(res => res.genres.map(elem => elem.name));
 
     if (genres.length > 2) {
       newGenres = genres.slice(0, 2).join(', ');
@@ -73,26 +88,12 @@ const createFilmsGalery = elem => {
 </figcaption>
 </figure>`;
 
-    filmsGalery.innerHTML = filmsGalery.innerHTML + galeryItem;
+    filmGalery.innerHTML = filmGalery.innerHTML + galeryItem;
   });
-};
-
-// function that uses film id from createFilmsGalery function.
-// This function creates details of tranding films but is used for creating genres names.
-// !!! Can be used for modal window after small changes !!!
-const getGenres = async id => {
-  link = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`;
-  let gen;
-  await fetchFilms(link).then(res => {
-    gen = res.genres.map(ele => ele.name);
-  });
-
-  return gen;
 };
 
 // Pagination
 
-paginationList.innerHTML = '';
 function createButtons(totalPages, page) {
   let liTag = '';
   let beforePage = page - 1;
@@ -100,7 +101,7 @@ function createButtons(totalPages, page) {
   let activeLi;
   if (page > 1) {
     liTag += `<button class="pagination__button--arrow-left">
-    <svg class="pagination__icon--arrow-left" style="pointer-events: none;"><use href="icons.adfc4680.svg#arrow" style="pointer-events: none;"></use></svg>
+    <svg class="pagination__icon--arrow-left" style="pointer-events: none;"><use href="/src/images/icons.svg#arrow"" style="pointer-events: none;"></use></svg>
   </button>`;
   }
   if (page > 2) {
@@ -144,7 +145,7 @@ function createButtons(totalPages, page) {
 
   if (page < totalPages) {
     liTag += `<button class="pagination__button--arrow-right">
-    <svg class="pagination__icon--arrow-right" style="pointer-events: none;"><use href="icons.adfc4680.svg#arrow" style="pointer-events: none;"></use></svg>
+    <svg class="pagination__icon--arrow-right" style="pointer-events: none;"><use href="/src/images/icons.svg#arrow" style="pointer-events: none;"></use></svg>
   </button>`;
   }
 
@@ -178,5 +179,3 @@ filmCards.forEach(el => el.addEventListener('click', showModal));
 const closeModalBtn = document.getElementsByClassName('movie-details-modal__close-btn')[0];
 window.addEventListener('click', closeModal);
 closeModalBtn.addEventListener('click', closeModal);
-
-//
