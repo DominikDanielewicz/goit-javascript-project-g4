@@ -1,32 +1,20 @@
-import { getFilmDetails } from './mainpage';
+import { createfilmGalery } from './mainpage';
 import { showModal } from './movie-details-modal';
 
-// const modalOpen = document.querySelectorAll('[data-modal-open]'); //na moje potzreby
+const modalOpen = document.querySelectorAll('.gallery__box'); //na moje potzreby
 const template = document.querySelector('#film-template');
 // const modalView = document.querySelector('.backdrop'); //na moje potrzeby
 const baseURL = 'http://image.tmdb.org/t/p/';
 
 let card = null;
-let filmId = null;
+let movieId = null;
 
-//funkcja otwierająca film na click/ID przekazane jest do funkcji renderującej
-const modalIsOpen = () => {
-  showModal();
-  template.innerHTML = '';
-  card.e.target.parentElement.dataset.id;
-  if (!card) {
-    return;
-  }
-
-  movieById();
-};
-
-//funkcja fetch z ID
+//funkcja fetch z wybranego filmu
 
 function movieById() {
-  getFilmDetails(filmId)
+  createfilmGalery(movieId)
     .then(movie => {
-      renderMovieCard(filmId, movie);
+      renderMovieCard(movieId, movie);
     })
     .catch(err => {});
 }
@@ -76,6 +64,19 @@ const renderMovieCard = (id, movie) => {
   `;
 };
 
-// modalOpen.addEventListener('click', modalIsOpen);
+//funkcja otwierająca film na click/ID przekazane jest do funkcji renderującej
+const modalIsOpen = () => {
+  template.innerHTML = '';
+  card = e.target.closest('.gallery__box');
+
+  if (!card) {
+    return;
+  }
+  showModal();
+  movieId = card.getAttribute('data-id');
+  movieById();
+};
+
+modalOpen.addEventListener('click', modalIsOpen);
 
 export { modalIsOpen, card, renderMovieCard };
