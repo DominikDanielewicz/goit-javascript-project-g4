@@ -1,28 +1,14 @@
-import { createfilmGalery } from './mainpage';
+import { APIKEY } from './mainpage';
 import { showModal } from './movie-details-modal';
 
-const modalOpen = document.querySelectorAll('.gallery__box'); //na moje potzreby
+const gallery = document.querySelector('.gallery__box');
 const template = document.querySelector('#film-template');
-// const modalView = document.querySelector('.backdrop'); //na moje potrzeby
 const baseURL = 'http://image.tmdb.org/t/p/';
 
-let card = null;
-let movieId = null;
-
-//funkcja fetch z wybranego filmu
-
-function movieById() {
-  createfilmGalery(movieId)
-    .then(movie => {
-      renderMovieCard(movieId, movie);
-    })
-    .catch(err => {});
-}
-
 // fukcja renderująca kartę filmu w oknie modalnym - umieszczenie danych w szablonie
-const renderMovieCard = (id, movie) => {
+const renderMovieDetails = (id, movie) => {
+  console.log(movie);
   let getGenres = [...movie.genres].map(genre => genre.name).join(', ');
-
   template.innerHTML = `
  <section class="backdrop">
  <section class="movie-details-modal data-id="${id}"">
@@ -62,21 +48,49 @@ const renderMovieCard = (id, movie) => {
     </section>
 
   `;
+  showModal();
 };
 
 //funkcja otwierająca film na click/ID przekazane jest do funkcji renderującej
-const modalIsOpen = () => {
-  template.innerHTML = '';
-  card = e.target.closest('.gallery__box');
 
-  if (!card) {
-    return;
+async function fetchMovieById(id) {
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`);
+    const data = await response.json();
+
+    const genresResponse = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${APIKEY}`);
+    const genresData = await genresResponse.json();
+    const genres = genresData.genres;
+
+    const movieGenres =
+      data.genre_ids && Array.isArray(data.genre_ids)
+        ? data.genre_ids.map(genreId => {
+            const genre = genres.find(g => g.id === genreId);
+            return genre.name;
+          })
+        : [];
+    console.log({ ...data, genre_ids: movieGenres });
+    return { ...data, genre_ids: movieGenres };
+  } catch (error) {
+    console.error(error);
   }
-  showModal();
-  movieId = card.getAttribute('data-id');
-  movieById();
-};
+}
+function movieDetails(id) {
+  fetchMovieById(id).then(movie => {
+    renderMovieDetails(id, movie);
+    console.log(movie);
+  });
+}
+gallery.addEventListener('click', event => {
+  let target = event.target;
+  while (target && !target.classList.contains('card')) {
+    target = target.parentElement;
+  }
+  if (target) {
+    const id = target.dataset.id;
+    console.log(id);
+    movieDetails(id);
+  }
+});
 
-modalOpen.addEventListener('click', modalIsOpen);
-
-export { modalIsOpen, card, renderMovieCard };
+export { renderMovieDetails };
