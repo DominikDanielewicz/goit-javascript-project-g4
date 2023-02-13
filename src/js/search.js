@@ -12,27 +12,32 @@ function getFilms() {
     .then(results => {
       results
         .forEach(result => {
-          let title = result.original_title;
-          if (title.length > 35) {
-            console.log(title);
-            const lastSpaceIndex = title.lastIndexOf(' ', 32);
-            title = title.slice(0, lastSpaceIndex) + '...';
-          }
-          let poster = `https://image.tmdb.org/t/p/w500${result.poster_path}`;
-          if (result.poster_path == null) {
-            poster =
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png';
-          }
-          movieGallery.insertAdjacentHTML(
-            'afterbegin',
-            `<figure class="card" data-id="${result.id}">
+          fetch(`https://api.themoviedb.org/3/movie/${result.id}?api_key=${APIKEY}`)
+            .then(result => result.json())
+            .then(result => {
+              genres = result.genres.map(genre => genre.name).join(', ');
+              let releaseDate = result.release_date.slice(0, 4) || 'Sorry. No relase date yet.';
+              let title = result.original_title;
+              if (title.length > 35) {
+                console.log(title);
+                const lastSpaceIndex = title.lastIndexOf(' ', 32);
+                title = title.slice(0, lastSpaceIndex) + '...';
+              }
+              let poster = `https://image.tmdb.org/t/p/w500${result.poster_path}`;
+              if (result.poster_path == null) {
+                poster =
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png';
+              }
+              let markup = `<figure class="card" data-id="${result.id}">
 <img class="card__image" src="${poster}" alt="${title} movie poster" />
 <figcaption class="card__caption">
   <p class="card__title">${title}</p>
-  <p class="card__description">${'newGenres + other'} | ${'releseDate'}</p>
+  <p class="card__description">${genres} | ${releaseDate}</p>
 </figcaption>
-</figure>`
-          );
+</figure>`;
+
+              movieGallery.insertAdjacentHTML('afterbegin', markup);
+            });
         })
         .catch(error => console.log(error));
     });
