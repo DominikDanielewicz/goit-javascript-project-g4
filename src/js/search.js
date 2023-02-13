@@ -15,7 +15,14 @@ function getFilms() {
           fetch(`https://api.themoviedb.org/3/movie/${result.id}?api_key=${APIKEY}`)
             .then(result => result.json())
             .then(result => {
-              genres = result.genres.map(genre => genre.name).join(', ');
+              genres = result.genres.map(genre => genre.name);
+              if (result.genres.length > 2) {
+                genres = genres.slice(0, 2).join(', ') + ', Other';
+              } else if (result.genres.length < 1) {
+                genres = 'Sorry. No genre added yet.';
+              } else {
+                genres = genres.join(', ');
+              }
               let releaseDate = result.release_date.slice(0, 4) || 'Sorry. No relase date yet.';
               let title = result.original_title;
               if (title.length > 35) {
