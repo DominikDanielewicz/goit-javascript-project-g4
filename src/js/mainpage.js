@@ -101,7 +101,7 @@ function createButtons(totalPages, page) {
   let activeLi;
   if (page > 1) {
     liTag += `<button class="pagination__button--arrow-left">
-    <svg class="pagination__icon--arrow-left" style="pointer-events: none;"><use href="/src/images/icons.svg#arrow"" style="pointer-events: none;"></use></svg>
+    <i style="pointer-events: none" class="fa-solid fa-arrow-left"></i>
   </button>`;
   }
   if (page > 2) {
@@ -145,7 +145,7 @@ function createButtons(totalPages, page) {
 
   if (page < totalPages) {
     liTag += `<button class="pagination__button--arrow-right">
-    <svg class="pagination__icon--arrow-right" style="pointer-events: none;"><use href="/src/images/icons.svg#arrow" style="pointer-events: none;"></use></svg>
+    <i style="pointer-events: none" class="fa-solid fa-arrow-right"></i>
   </button>`;
   }
 
