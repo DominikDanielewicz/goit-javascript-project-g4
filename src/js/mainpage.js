@@ -3,7 +3,7 @@ import { closeModal, showModal } from './movie-details-modal';
 const filmGalery = document.querySelector('.gallery__box');
 const paginationList = document.querySelector('.pagination');
 
-const APIKEY = 'cd99a2449e6daaffb205ea92bac682a0';
+export const APIKEY = 'cd99a2449e6daaffb205ea92bac682a0';
 let page = 1;
 let totalPages;
 let link;
