@@ -1,5 +1,4 @@
 'use strict';
-import { closeModal, showModal } from './movie-details-modal';
 const filmGalery = document.querySelector('.gallery__box');
 const paginationList = document.querySelector('.pagination');
 
@@ -173,9 +172,9 @@ paginationList.addEventListener('click', chceckBttn);
 
 // Operating the modal window
 
-const filmCards = [...document.querySelectorAll('figure')];
-filmCards.forEach(el => el.addEventListener('click', showModal));
+// const filmCards = [...document.querySelectorAll('figure')];
+// filmCards.forEach(el => el.addEventListener('click', showModal));
 
-const closeModalBtn = document.getElementsByClassName('movie-details-modal__close-btn')[0];
-window.addEventListener('click', closeModal);
-closeModalBtn.addEventListener('click', closeModal);
+// const closeModalBtn = document.getElementsByClassName('movie-details-modal__close-btn')[0];
+// window.addEventListener('click', closeModal);
+// closeModalBtn.addEventListener('click', closeModal);

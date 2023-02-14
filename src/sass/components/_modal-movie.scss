@@ -51,7 +51,7 @@
     background-color: $background-color-secondary;
     border-radius: 5px;
     @include media-query(mobile) {
-      width: 100%;
+      width: max(100%, 264px);
     }
     @include media-query(tablet) {
       width: 264px;
