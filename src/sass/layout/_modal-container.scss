@@ -15,4 +15,15 @@
     @include flexbox(row, nowrap, flex-start, flex-start);
     top: 230px;
   }
+  &::after {
+    content: '';
+    opacity: 0.25;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+  }
 }

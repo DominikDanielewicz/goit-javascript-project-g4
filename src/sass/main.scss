@@ -15,6 +15,7 @@
 @import './layout/library-actions';
 @import './layout/main-section';
 @import './layout/pagination';
+@import './layout/modal-container';
 
 //components
 @import './components/search-form';
@@ -23,4 +24,5 @@
 @import './components/logo';
 @import './components/navigation';
 @import './components/button';
-@import './components/movie-details-modal';
+// @import './components/movie-details-modal';
+@import './components/modal-movie.scss';

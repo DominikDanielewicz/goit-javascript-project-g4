@@ -1,38 +1,63 @@
-<div class="modal">
-  <div class="backdrop hidden" data-backdrop>
-    <div class="movie-details-modal" data-modal-open>
-      <div class="movie-details-modal__img"></article>
-      <div class="movie-details-modal__info">
-        <h2>Movie Title</h2>
-        <div class="movie-details-modal__list">
-          <ul class="list__headings">
-            <li>Vote / Votes</li>
-            <li>Popularity</li>
-            <li>Original Title</li>
-            <li>Genre</li>
-          </ul>
-          <ul class="list__data">
+<div class="modal-container">
+  <div class="modal-movie">
+    <button class="modal-movie__button-close">
+      <svg class="modal-movie__icon-close">
+        <use href="/src/images/icons.svg#close"></use>
+      </svg>
+    </button>
+    <div class="modal-movie__wrapper">
+      <img
+        class="modal-movie__movie-poster"
+        src="https://image.tmdb.org/t/p/w500/dm06L9pxDOL9jNSK4Cb6y139rrG.jpg"
+        alt="#"
+      />
+      <article class="modal-movie__info">
+        <h2 class="modal-movie__title">Movie Title</h2>
+        <div class="stats-list__box">
+          <ul class="stats-list">
             <li>
-              <button type="button" class="list__btn">9.5</button>
-              <span class="list__headings"> / </span>
-              <button type="button" class="list__btn">1000</button>
+              <p>Vote / Votes</p>
             </li>
-            <li>Popularity</li>
-            <li>Original Title</li>
-            <li>Genre</li>
+            <li>
+              <p>Popularity</p>
+            </li>
+            <li>
+              <p>Original title</p>
+            </li>
+            <li>
+              <p>Genre</p>
+            </li>
+          </ul>
+          <ul class="stats-list__values">
+            <li>
+              <p><span class="stats-list__highlight">7.3</span> / 1260</p>
+            </li>
+            <li>
+              <p>102</p>
+            </li>
+            <li>
+              <p>ASDASDASDASD</p>
+            </li>
+            <li>
+              <p>Western</p>
+            </li>
           </ul>
         </div>
-        <h3>About</h3>
-        <p>
-          Lorem ipsum dolor sin amet. Lorem ipsum dolor sin amet. Lorem ipsum dolor sin amet. Lorem ipsum dolor sin
-          amet. Lorem ipsum dolor sin amet.
-        </p>
-        <div class="movie-details-modal__btn-container">
-          <button type="button" class="btn-container__watched">Add to watched</button>
-          <button type="button" class="btn-container__queue">Add to queue</button>
+        <div class="movie-description">
+          <h3 class="movie-description__heading">ABOUT</h3>
+          <p class="movie-description__plot">
+            Four of the West’s most infamous outlaws assemble to steal a huge stash of gold from the most corrupt
+            settlement of the gold rush towns. But not all goes to plan one is killed and the other three escapes with
+            bags of gold hide out in the abandoned gold mine where they happen across another gang of three – who
+            themselves were planning to hit the very same bank! As tensions rise, things go from bad to worse as they
+            realise the bags of gold are filled with lead... they’ve been double crossed – but by who and how?
+          </p>
         </div>
-      </div>
-      <button type="button" class="movie-details-modal__close-btn"></button>
+        <div class="modal-movie__buttons">
+          <button class="modal-movie__button-add-to-watched">ADD TO WATCHED</button>
+          <button class="modal-movie__button-add-to-queue">ADD TO QUEUE</button>
+        </div>
+      </article>
     </div>
   </div>
 </div>
