@@ -2,10 +2,9 @@
   border: 1px solid $font-color-primary;
   border-radius: 5px;
   background: $button-background-color;
-  transition: transform 0.2s;
   cursor: pointer;
   @include font(Roboto, 12px, 500, 16px, $font-color-primary);
-  @include transition(background-color border-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+  @include transition(transform background-color border-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
   &:active {
     transform: scale(0.9);
   }
