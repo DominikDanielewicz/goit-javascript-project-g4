@@ -1,4 +1,4 @@
-import { APIKEY } from './mainpage';
+import { APIKEY } from './trendingFilms';
 
 // Function to call the API by movie ID and get a reponse with details
 // returns an object with details - genres are already resolved

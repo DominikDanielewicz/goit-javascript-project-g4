@@ -1,7 +1,7 @@
 const movieGallery = document.querySelector('.gallery__box');
 const searchBox = document.querySelector('.search-form__input');
 import Notiflix from 'notiflix';
-import { APIKEY, fetchFilms, getFilmDetails, trendingFilms, createfilmGalery } from './mainpage';
+import { APIKEY, fetchFilms, getFilmDetails, trendingFilms, createfilmGalery } from './trendingFilms';
 var _ = require('lodash');
 
 function getFilms() {

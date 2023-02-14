@@ -1,6 +1,6 @@
 export { getMovieWatched, renderMovies, printMovie };
 
-import { APIKEY } from './mainpage';
+import { APIKEY } from './trendingFilms';
 
 const btnGet = document.querySelector('.library-actions__button--active');
 const filmsGallery = document.querySelector('.gallery__library');
