@@ -19,7 +19,9 @@
     "url": "https://github.com/dominikdanielewicz/goit-javascript-project-g4/issues"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.6",
     "parcel": "^2.8.2"
   },
   "devDependencies": {

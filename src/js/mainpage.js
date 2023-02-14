@@ -32,7 +32,7 @@ export const getFilmDetails = async id => {
 };
 
 // Main function that loads tranding film on main page
-const trendingFilms = () => {
+export const trendingFilms = () => {
   link = `
     https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}&page=${page}`;
 
