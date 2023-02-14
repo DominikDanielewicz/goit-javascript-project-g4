@@ -1,5 +1,8 @@
 'use strict';
 import { closeModal, showModal } from './movie-details-modal';
+import { hideSpinner, showSpinner } from './spinner';
+
+/* |EN: container for storing films |PL:  kontener do przechowywania wynikow wyszukiwania filmów */
 const filmGalery = document.querySelector('.gallery__box');
 const paginationList = document.querySelector('.pagination');
 
@@ -12,10 +15,11 @@ let filmsOnPage;
 const { log } = console;
 
 // Fetch films from API
-
 export const fetchFilms = link => {
+  showSpinner();
   return fetch(link)
     .then(res => {
+      hideSpinner();
       return res.json();
     })
     .catch(error => log(error));
