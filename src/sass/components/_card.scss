@@ -1,10 +1,10 @@
 .card {
   cursor: pointer;
-  @include transition(scale, 0.15s, cubic-bezier(0, 0, 1, 1), 0s);
+  @include transition(transform, 0.15s, cubic-bezier(0, 0, 1, 1), 0s);
   &:hover,
   &:focus-within {
-    scale: 1.1;
-    @include transition(scale, 0.15s, cubic-bezier(0, 0, 1, 1), 0s);
+    transform: scale(1.1);
+    @include transition(transform, 0.15s, cubic-bezier(0, 0, 1, 1), 0s);
   }
   &__image {
     background-color: $background-color-secondary;

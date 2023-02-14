@@ -1,4 +1,6 @@
 .hidden {
-  visibility: hidden;
   display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 250ms;
 }

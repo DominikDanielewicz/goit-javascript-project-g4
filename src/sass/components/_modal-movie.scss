@@ -40,12 +40,23 @@
     right: 10px;
     background-color: $background-color-tertiary;
     border: none;
+    transition: transform 0.2s;
+    &:active {
+      transform: scale(0.8);
+    }
+    &:hover svg,
+    &:focus svg {
+      stroke: $accent-color;
+      stroke-width: 3px;
+      @include transition(stroke stroke-width, 0.15s, ease-in-out, 0s);
+    }
   }
   &__icon-close {
     width: 32px;
     height: 32px;
     stroke: black;
     stroke-width: 2px;
+    @include transition(stroke stroke-width, 0.35s, ease-in-out, 0s);
   }
   &__movie-poster {
     background-color: $background-color-secondary;

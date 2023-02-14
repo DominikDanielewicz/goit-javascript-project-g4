@@ -1,7 +1,7 @@
 .link {
   text-decoration: none;
   color: inherit;
-  @include transition(color, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+  @include transition(transform color, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
 
   &--active {
     @extend .link;
@@ -21,6 +21,9 @@
   &:hover {
     color: $accent-color;
     @include transition(color, 0.25s, cubic-bezier(0, 0, 0.2, 1), 0s);
+  }
+  &:active {
+    transform: scale(0.97);
   }
 }
 

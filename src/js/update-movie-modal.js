@@ -8,9 +8,7 @@ const baseURL = 'http://image.tmdb.org/t/p/w500';
 
 // function generating html from template with movie data
 const fillMovieModalData = (id, movie) => {
-  console.log(movie);
   let getGenres = [...movie.genres].map(genre => genre.name).join(', ');
-  console.log(baseURL + movie.poster_path);
   partToFill.innerHTML = `
   <img class="modal-movie__movie-poster" src="${baseURL + movie.poster_path}" alt="#" />
   <article class="modal-movie__info">
@@ -62,7 +60,6 @@ const fillMovieModalData = (id, movie) => {
 function fillData(id) {
   fetchMovieById(id).then(movie => {
     fillMovieModalData(id, movie);
-    console.log(movie);
   });
 }
 gallery.addEventListener('click', event => {
