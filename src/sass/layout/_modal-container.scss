@@ -1,0 +1,18 @@
+.modal-container {
+  @extend .container;
+  @include flexbox(row, nowrap, center, center);
+  position: fixed;
+
+  @include media-query(mobile) {
+    @include flexbox(column, nowrap, flex-start, flex-start);
+    top: 20px;
+  }
+  @include media-query(tablet) {
+    @include flexbox(row, nowrap, flex-start, flex-start);
+    top: 230px;
+  }
+  @include media-query(desktop) {
+    @include flexbox(row, nowrap, flex-start, flex-start);
+    top: 230px;
+  }
+}
