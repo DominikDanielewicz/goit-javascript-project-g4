@@ -12,7 +12,7 @@ const fillMovieModalData = (id, movie) => {
   partToFill.innerHTML = `
   <img class="modal-movie__movie-poster" src="${baseURL + movie.poster_path}" alt="#" />
   <article class="modal-movie__info">
-    <h2 class="modal-movie__title">Movie Title</h2>
+    <h2 class="modal-movie__title">${movie.title}</h2>
     <div class="stats-list__box">
       <ul class="stats-list">
         <li>
