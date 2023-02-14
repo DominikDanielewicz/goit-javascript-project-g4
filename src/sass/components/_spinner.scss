@@ -1,0 +1,24 @@
+.spinner {
+  svg {
+    width: 80px;
+    height: 80px;
+    animation: rotate 1s linear infinite;
+    fill: #212121;
+  }
+  .hidden {
+    display: none;
+  }
+
+  .show {
+    display: flex;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

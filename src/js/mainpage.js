@@ -1,4 +1,6 @@
 'use strict';
+import { closeModal, showModal } from './movie-details-modal';
+import { hideSpinner, showSpinner } from './spinner';
 const filmGalery = document.querySelector('.gallery__box');
 const paginationList = document.querySelector('.pagination');
 
