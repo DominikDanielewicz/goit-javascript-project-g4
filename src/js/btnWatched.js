@@ -62,6 +62,6 @@ printMovie();
 btnGet.addEventListener('click', () => {
   key = KEY_WATCHED;
   renderMovies();
-  // btnWatched.classList.add('is-chosen');
-  // btnQueue.classList.remove('is-chosen');
+  // btnWatched.classList.add('is-chosen');/
+  // btnQueue.classList.remove('is-chosen');//
 });
