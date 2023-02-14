@@ -1,38 +1,17 @@
-<div class="modal">
-  <div class="backdrop hidden" data-backdrop>
-    <div class="movie-details-modal" data-modal-open>
-      <div class="movie-details-modal__img"></article>
-      <div class="movie-details-modal__info">
-        <h2>Movie Title</h2>
-        <div class="movie-details-modal__list">
-          <ul class="list__headings">
-            <li>Vote / Votes</li>
-            <li>Popularity</li>
-            <li>Original Title</li>
-            <li>Genre</li>
-          </ul>
-          <ul class="list__data">
-            <li>
-              <button type="button" class="list__btn">9.5</button>
-              <span class="list__headings"> / </span>
-              <button type="button" class="list__btn">1000</button>
-            </li>
-            <li>Popularity</li>
-            <li>Original Title</li>
-            <li>Genre</li>
-          </ul>
+<div class="modal-container hidden">
+  <div class="modal-movie">
+    <button class="modal-movie__button-close">
+      <svg class="modal-movie__icon-close">
+        <use href="/src/images/icons.svg#close"></use>
+      </svg>
+    </button>
+    <!-- the rest is added through JS, click a card to fill this part -->
+    <div class="modal-movie__wrapper">
+        <div class="modal-movie__buttons">
+          <button class="modal-movie__button-add-to-watched">ADD TO WATCHED</button>
+          <button class="modal-movie__button-add-to-queue">ADD TO QUEUE</button>
         </div>
-        <h3>About</h3>
-        <p>
-          Lorem ipsum dolor sin amet. Lorem ipsum dolor sin amet. Lorem ipsum dolor sin amet. Lorem ipsum dolor sin
-          amet. Lorem ipsum dolor sin amet.
-        </p>
-        <div class="movie-details-modal__btn-container">
-          <button type="button" class="btn-container__watched">Add to watched</button>
-          <button type="button" class="btn-container__queue">Add to queue</button>
-        </div>
-      </div>
-      <button type="button" class="movie-details-modal__close-btn"></button>
+      </article>
     </div>
   </div>
 </div>
