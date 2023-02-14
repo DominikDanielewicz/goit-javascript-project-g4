@@ -1,8 +1,6 @@
 'use strict';
 import { closeModal, showModal } from './movie-details-modal';
 import { hideSpinner, showSpinner } from './spinner';
-
-/* |EN: container for storing films |PL:  kontener do przechowywania wynikow wyszukiwania filmów */
 const filmGalery = document.querySelector('.gallery__box');
 const paginationList = document.querySelector('.pagination');
 
@@ -15,11 +13,10 @@ let filmsOnPage;
 const { log } = console;
 
 // Fetch films from API
+
 export const fetchFilms = link => {
-  showSpinner();
   return fetch(link)
     .then(res => {
-      hideSpinner();
       return res.json();
     })
     .catch(error => log(error));
@@ -36,7 +33,7 @@ export const getFilmDetails = async id => {
 };
 
 // Main function that loads tranding film on main page
-const trendingFilms = () => {
+export const trendingFilms = () => {
   link = `
     https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}&page=${page}`;
 
@@ -174,12 +171,3 @@ const chceckBttn = e => {
   }
 };
 paginationList.addEventListener('click', chceckBttn);
-
-// Operating the modal window
-
-const filmCards = [...document.querySelectorAll('figure')];
-filmCards.forEach(el => el.addEventListener('click', showModal));
-
-const closeModalBtn = document.getElementsByClassName('movie-details-modal__close-btn')[0];
-window.addEventListener('click', closeModal);
-closeModalBtn.addEventListener('click', closeModal);

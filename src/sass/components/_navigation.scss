@@ -1,7 +1,10 @@
 .navigation {
+  margin: 0 auto;
+  max-width: 1300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   &__list {
     @include font(Roboto, 12px, 500, 14px, $font-color-primary);
     text-transform: uppercase;

@@ -1,10 +1,10 @@
 .card {
   cursor: pointer;
-  @include transition(scale, 0.15s, cubic-bezier(0, 0, 1, 1), 0s);
+  @include transition(transform, 0.15s, cubic-bezier(0, 0, 1, 1), 0s);
   &:hover,
   &:focus-within {
-    scale: 1.1;
-    @include transition(scale, 0.15s, cubic-bezier(0, 0, 1, 1), 0s);
+    transform: scale(1.1);
+    @include transition(transform, 0.15s, cubic-bezier(0, 0, 1, 1), 0s);
   }
   &__image {
     background-color: $background-color-secondary;
@@ -23,10 +23,13 @@
     }
   }
   &__caption {
+    width: 0;
+    min-width: 100%;
     padding-top: 10px;
     @include flexbox(column, nowrap, center, flex-start);
   }
   &__title {
+    word-wrap: break-word;
     @include font(Roboto, 12px, 500, 14px, $font-color-secondary);
   }
   &__description {

@@ -1,0 +1,141 @@
+.modal-movie {
+  background-color: $background-color-tertiary;
+  position: fixed;
+  overflow-y: overlay;
+  max-height: 95vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1024px, 90vw);
+  z-index: 1;
+  @include media-query(mobile) {
+    max-width: 100%;
+  }
+  @include media-query(tablet) {
+    max-width: 100%;
+  }
+  @include media-query(desktop) {
+    max-width: 1024px;
+  }
+
+  &__wrapper {
+    gap: 30px;
+    @include media-query(mobile) {
+      @include flexbox(column, nowrap, flex-start, flex-start);
+      padding: 48px 20px 30px 20px;
+    }
+    @include media-query(tablet) {
+      @include flexbox(row, nowrap, flex-start, flex-start);
+      padding: 42px 30px 30px 30px;
+    }
+    @include media-query(desktop) {
+      @include flexbox(row, nowrap, flex-start, flex-start);
+      padding: 50px 30px 40px 30px;
+    }
+  }
+  &__button-close {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 10px;
+    right: 10px;
+    background-color: $background-color-tertiary;
+    border: none;
+    transition: transform 0.2s;
+    &:active {
+      transform: scale(0.8);
+    }
+    &:hover svg,
+    &:focus svg {
+      stroke: $accent-color;
+      stroke-width: 3px;
+      @include transition(stroke stroke-width, 0.15s, ease-in-out, 0s);
+    }
+  }
+  &__icon-close {
+    width: 32px;
+    height: 32px;
+    stroke: black;
+    stroke-width: 2px;
+    @include transition(stroke stroke-width, 0.35s, ease-in-out, 0s);
+  }
+  &__movie-poster {
+    background-color: $background-color-secondary;
+    border-radius: 5px;
+    @include media-query(mobile) {
+      width: max(100%, 264px);
+    }
+    @include media-query(tablet) {
+      width: 264px;
+      height: 374px;
+    }
+    @include media-query(desktop) {
+      width: 398px;
+      height: 478px;
+    }
+  }
+  &__info {
+    @include flexbox(column, nowrap, flex-start, flex-start);
+    gap: 20px;
+  }
+  &__title {
+    @include font(Roboto, 20px, 500, 23px, $font-color-secondary);
+  }
+  &__buttons {
+    @include flexbox(row, nowrap, center, center);
+    width: 100%;
+    gap: 15px;
+  }
+  &__button-add-to-watched {
+    @extend .button;
+    padding: 14px 7px 12px 7px;
+    max-width: 136px;
+    background-color: #fff;
+    border: 1px solid black;
+    color: $font-color-secondary;
+    width: calc(50% - 7.5px);
+  }
+  &__button-add-to-queue {
+    @extend .button;
+    padding: 14px 7px 12px 7px;
+    max-width: 136px;
+    background-color: #fff;
+    border: 1px solid black;
+    color: $font-color-secondary;
+    width: calc(50% - 7.5px);
+  }
+}
+
+.stats-list {
+  @include flexbox(column, nowrap, flex-start, flex-start);
+  @include font(Roboto, 12px, 500, 16px, $font-color-alternative);
+  gap: 10px;
+  &__values {
+    @extend .stats-list;
+    @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
+  }
+  & li {
+    @include flexbox(column, nowrap, flex-start, flex-start);
+    gap: 10px;
+  }
+  &__box {
+    @include flexbox(row, nowrap, flex-start, flex-start);
+    gap: 85px;
+  }
+  &__highlight {
+    background-color: $accent-color;
+    border-radius: 5px;
+    padding: 1px 5px;
+    color: $font-color-primary;
+  }
+}
+
+.movie-description {
+  @include flexbox(column, nowrap, flex-start, flex-start);
+  gap: 10px;
+  &__heading {
+    @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
+  }
+  &__plot {
+    @include font(Roboto, 12px, 500, 20px, $font-color-secondary);
+  }
+}
