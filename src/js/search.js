@@ -8,6 +8,7 @@ const paginationList = document.querySelector('.pagination');
 let page = 1;
 let totalPages;
 let filmsOnPage;
+let searchMode = false;
 
 function fetchMovies() {
   let query = searchBox.value;
@@ -64,6 +65,8 @@ function renderGallery(results) {
 }
 
 function getFilms() {
+  searchMode = true;
+  console.log(searchMode);
   movieGallery.innerHTML = ' ';
   fetchMovies()
     .then(json => {
@@ -90,21 +93,26 @@ searchBox.addEventListener(
   }, 700)
 );
 
-const chceckBttn = e => {
+// Pagination
+
+const checkBttnSearch = e => {
   const prev = document.querySelector('.pagination__button--arrow-left');
   const next = document.querySelector('.pagination__button--arrow-right');
 
-  if (e.target === prev) {
-    page--;
-    getFilms();
-  }
-  if (e.target === next) {
-    page++;
-    getFilms();
-  }
-  if (e.target.type === 'button') {
-    page = Number(e.target.dataset.page);
-    getFilms();
+  if (searchMode) {
+    console.log('searchMode test');
+    if (e.target === prev) {
+      page--;
+      getFilms();
+    }
+    if (e.target === next) {
+      page++;
+      getFilms();
+    }
+    if (e.target.type === 'button') {
+      page = Number(e.target.dataset.page);
+      getFilms();
+    }
   }
 };
-paginationList.addEventListener('click', chceckBttn);
+paginationList.addEventListener('click', checkBttnSearch);
