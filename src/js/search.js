@@ -8,7 +8,6 @@ const paginationList = document.querySelector('.pagination');
 let page = 1;
 let totalPages;
 let filmsOnPage;
-let searchMode = false;
 
 function fetchMovies() {
   let query = searchBox.value;
@@ -65,8 +64,6 @@ function renderGallery(results) {
 }
 
 function getFilms() {
-  searchMode = true;
-  console.log(searchMode);
   movieGallery.innerHTML = ' ';
   fetchMovies()
     .then(json => {
@@ -99,20 +96,17 @@ const checkBttnSearch = e => {
   const prev = document.querySelector('.pagination__button--arrow-left');
   const next = document.querySelector('.pagination__button--arrow-right');
 
-  if (searchMode) {
-    console.log('searchMode test');
-    if (e.target === prev) {
-      page--;
-      getFilms();
-    }
-    if (e.target === next) {
-      page++;
-      getFilms();
-    }
-    if (e.target.type === 'button') {
-      page = Number(e.target.dataset.page);
-      getFilms();
-    }
+  if (e.target === prev) {
+    page--;
+    getFilms();
+  }
+  if (e.target === next) {
+    page++;
+    getFilms();
+  }
+  if (e.target.type === 'button') {
+    page = Number(e.target.dataset.page);
+    getFilms();
   }
 };
 paginationList.addEventListener('click', checkBttnSearch);
