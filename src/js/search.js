@@ -5,20 +5,19 @@ import Notiflix from 'notiflix';
 import { APIKEY, fetchFilms, getFilmDetails, trendingFilms, createfilmGalery, createButtons } from './trendingFilms';
 var _ = require('lodash');
 const paginationList = document.querySelector('.pagination');
+let page = 1;
+let totalPages;
+let filmsOnPage;
 
 function fetchMovies() {
-  let page = 1;
   let query = searchBox.value;
   if (query == '') {
     trendingFilms();
     return;
   }
-  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${query}&page=${page}`)
-    .then(response => response.json())
-    .then(json => {
-      console.log(json.results);
-      return json.results;
-    });
+  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${query}&page=${page}`).then(
+    response => response.json()
+  );
 }
 
 function renderGallery(results) {
@@ -66,29 +65,17 @@ function renderGallery(results) {
 
 function getFilms() {
   movieGallery.innerHTML = ' ';
-  fetchMovies().then(results => renderGallery(results));
+  fetchMovies()
+    .then(json => {
+      totalPages = json.total_pages;
+      filmsOnPage = json.results;
+      createButtons(totalPages, page);
+      return json.results;
+    })
+    .then(results => {
+      renderGallery(results);
+    });
 }
-
-// Pagination
-
-// const chceckBttn = e => {
-//   const prev = document.querySelector('.pagination__button--arrow-left');
-//   const next = document.querySelector('.pagination__button--arrow-right');
-
-//   if (e.target === prev) {
-//     page--;
-//     trendingFilms();
-//   }
-//   if (e.target === next) {
-//     page++;
-//     trendingFilms();
-//   }
-//   if (e.target.type === 'button') {
-//     page = Number(e.target.dataset.page);
-//     trendingFilms();
-//   }
-// };
-// paginationList.addEventListener('click', chceckBttn);
 
 // Listeners
 
@@ -102,3 +89,22 @@ searchBox.addEventListener(
     getFilms();
   }, 700)
 );
+
+const chceckBttn = e => {
+  const prev = document.querySelector('.pagination__button--arrow-left');
+  const next = document.querySelector('.pagination__button--arrow-right');
+
+  if (e.target === prev) {
+    page--;
+    getFilms();
+  }
+  if (e.target === next) {
+    page++;
+    getFilms();
+  }
+  if (e.target.type === 'button') {
+    page = Number(e.target.dataset.page);
+    getFilms();
+  }
+};
+paginationList.addEventListener('click', chceckBttn);
