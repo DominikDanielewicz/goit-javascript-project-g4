@@ -42,7 +42,6 @@ function renderGallery(results) {
         let releaseDate = result.release_date.slice(0, 4) || 'Sorry. No release date yet.';
         let title = result.original_title;
         if (title.length > 35) {
-          console.log(title);
           const lastSpaceIndex = title.lastIndexOf(' ', 32);
           title = title.slice(0, lastSpaceIndex) + '...';
         }
