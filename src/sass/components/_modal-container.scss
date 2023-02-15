@@ -15,7 +15,7 @@
     @include flexbox(row, nowrap, flex-start, flex-start);
     top: 230px;
   }
-  transition: all 250ms;
+  transition: visibility 250ms ease-in-out, opacity 250ms ease-in-out;
   &::after {
     content: '';
     opacity: 0.25;
