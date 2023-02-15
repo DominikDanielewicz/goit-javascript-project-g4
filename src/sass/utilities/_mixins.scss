@@ -31,11 +31,11 @@
       @content;
     }
   } @else if $breakpoint == tablet {
-    @media (min-width: #{$tablet + 1px}) and (max-width: #{$desktop}) {
+    @media (min-width: #{$tablet}) and (max-width: #{$desktop}) {
       @content;
     }
   } @else if $breakpoint == desktop {
-    @media (min-width: #{$desktop + 1px}) {
+    @media (min-width: #{$desktop}) {
       @content;
     }
   } @else if $breakpoint == desktop-wide {
