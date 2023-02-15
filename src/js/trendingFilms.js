@@ -44,6 +44,8 @@ export const trendingFilms = () => {
 
     createfilmGalery(filmsOnPage);
     createButtons(totalPages, page);
+    paginationList.dataset.search = 'trending';
+    paginationList.addEventListener('click', chceckBttn);
   });
 };
 
@@ -182,17 +184,20 @@ const chceckBttn = e => {
   const prev = document.querySelector('.pagination__button--arrow-left');
   const next = document.querySelector('.pagination__button--arrow-right');
 
-  if (e.target === prev) {
-    page--;
-    trendingFilms();
-  }
-  if (e.target === next) {
-    page++;
-    trendingFilms();
-  }
-  if (e.target.type === 'button') {
-    page = Number(e.target.dataset.page);
-    trendingFilms();
+  if (paginationList.dataset.search === 'search') {
+    return;
+  } else {
+    if (e.target === prev) {
+      page--;
+      trendingFilms();
+    }
+    if (e.target === next) {
+      page++;
+      trendingFilms();
+    }
+    if (e.target.type === 'button') {
+      page = Number(e.target.dataset.page);
+      trendingFilms();
+    }
   }
 };
-paginationList.addEventListener('click', chceckBttn);

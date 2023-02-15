@@ -23,10 +23,12 @@ function fetchMovies() {
 function renderGallery(results) {
   if (results.length < 1) {
     Notiflix.Notify.failure('Sorry, no movies found.', { position: 'center-top', cssAnimationStyle: 'zoom' });
+    paginationList.dataset.search = 'trending';
     trendingFilms();
     searchBox.value = ' ';
   }
-
+  paginationList.addEventListener('click', checkBttnSearch);
+  paginationList.dataset.search = 'search';
   results.forEach(result => {
     fetch(`https://api.themoviedb.org/3/movie/${result.id}?api_key=${APIKEY}`)
       .then(result => result.json())
@@ -108,4 +110,3 @@ const checkBttnSearch = e => {
     getFilms();
   }
 };
-paginationList.addEventListener('click', checkBttnSearch);
