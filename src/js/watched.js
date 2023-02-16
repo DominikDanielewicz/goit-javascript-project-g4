@@ -8,7 +8,10 @@ function addToWatched(event) {
   const button = event.target;
   const movieId = button.dataset.id;
 
-  watched.push(movieId);
+  if (!watched.includes(movieId)) {
+    watched.push(movieId);
+  }
+
   localStorage.setItem('watched', JSON.stringify(watched));
 }
 
@@ -16,7 +19,10 @@ function addToQueue(event) {
   const button = event.target;
   const movieId = button.dataset.id;
 
-  queue.push(movieId);
+  if (!queue.includes(movieId)) {
+    queue.push(movieId);
+  }
+
   localStorage.setItem('queue', JSON.stringify(queue));
 }
 
