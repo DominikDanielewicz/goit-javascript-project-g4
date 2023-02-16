@@ -12,6 +12,7 @@ let filmsOnPage;
 function fetchMovies() {
   let query = searchBox.value;
   if (query == '') {
+    page = 1;
     trendingFilms();
     return;
   }
@@ -82,14 +83,9 @@ function getFilms() {
 
 searchForm.addEventListener('submit', event => {
   event.preventDefault();
+  page = 1;
+  getFilms();
 });
-
-searchBox.addEventListener(
-  'input',
-  _.debounce(() => {
-    getFilms();
-  }, 700)
-);
 
 // Pagination
 
