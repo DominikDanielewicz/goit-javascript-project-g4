@@ -2,7 +2,7 @@ const movieGallery = document.querySelector('.gallery__box');
 const searchBox = document.querySelector('.search-form__input');
 const searchForm = document.querySelector('.search-form');
 import Notiflix from 'notiflix';
-import { trendingFilms } from './trendingFilms';
+import { trendingFilms } from './trending-films';
 import { APIKEY, createButtons, paginationList } from './globals';
 var _ = require('lodash');
 const paginationList = document.querySelector('.pagination');
