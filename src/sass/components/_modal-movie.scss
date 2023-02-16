@@ -8,7 +8,7 @@
   width: min(1024px, 90vw);
   z-index: 1;
   @include media-query(mobile) {
-    max-width: 100%;
+    max-width: max(100%, 280px);
   }
   @include media-query(tablet) {
     max-width: 100%;
@@ -76,6 +76,7 @@
   &__info {
     @include flexbox(column, nowrap, flex-start, flex-start);
     gap: 20px;
+    width: max(100%, 264px);
   }
   &__title {
     @include font(Roboto, 20px, 500, 23px, $font-color-secondary);
