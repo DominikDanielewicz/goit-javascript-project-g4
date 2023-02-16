@@ -2,7 +2,7 @@
   @extend .container;
   @include flexbox(row, nowrap, center, center);
   position: fixed;
-
+  min-width: $mobile;
   @include media-query(mobile) {
     @include flexbox(column, nowrap, flex-start, flex-start);
     top: 20px;
