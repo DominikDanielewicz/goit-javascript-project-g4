@@ -1,0 +1,105 @@
+.authors {
+  &__backdrop {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    background: rgba(gray, $alpha: 0.5);
+    width: 100%;
+    height: 100%;
+    animation: openBackdrop 1s linear forwards;
+    &.hidden {
+      display: none;
+    }
+
+    &.show {
+      display: flex;
+    }
+  }
+
+  //DOROBIC ANIMACJE CHOWANIA SIE
+  &__modal {
+    display: block;
+    //decorative
+    background: white;
+    border-radius: 10px;
+    //hide corners from modal header
+    overflow: hidden;
+    //shadow
+    box-shadow: 11px 11px 40px -13px rgba(0, 0, 0, 0.73);
+  }
+  &__list {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.modal {
+  &__header {
+    @include flexbox();
+    background: #212121;
+    letter-spacing: 5px;
+    text-decoration: underline 2px $accent-color;
+    align-items: center;
+    justify-content: center;
+    @include media-query(desktop) {
+      padding: 30px;
+    }
+    border-bottom: 3px solid $accent-color;
+    &-title {
+      @include font(Roboto, 24px, 700, 19px, $font-color-secondary);
+      color: white;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  &__button {
+    width: 200px;
+    height: 50px;
+
+    @extend .button;
+  }
+}
+
+.author {
+  border: 1px solid black;
+  &__selfie {
+    @include media-query(desktop) {
+      max-width: 370px;
+      max-height: 200px;
+    }
+  }
+
+  &__desc {
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+.desc {
+  &__title {
+    font-weight: 700;
+    text-decoration: 3px underline $accent-color;
+    padding-bottom: 5px;
+  }
+}
+
+@keyframes openBackdrop {
+  0% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
