@@ -6,7 +6,7 @@ import { createButtons, paginationList } from './globals';
 let queueStorage = JSON.parse(localStorage.getItem('queue'));
 
 let page = 1;
-const paginationLimit = 3;
+const paginationLimit = 20;
 const totalPages = Math.ceil(queueStorage.length / paginationLimit);
 const filmGalery = document.querySelector('.gallery__box');
 const paginationList = document.querySelector('.pagination');
