@@ -1,5 +1,4 @@
-import { APIKEY } from './trendingFilms';
-
+import { APIKEY } from './globals';
 // Function to call the API by movie ID and get a reponse with details
 // returns an object with details - genres are already resolved
 // id parameter needs to be a string
@@ -20,7 +19,6 @@ export async function fetchMovieById(id) {
             return genre.name;
           })
         : [];
-
     return { ...data, genre_ids: movieGenres };
   } catch (error) {
     console.error(error);
