@@ -3,7 +3,12 @@ import { fetchMovieById } from './fetch';
 import { createGallery } from './create-gallery';
 import { TOTAL_PAGES, PAGE, setPage, setPaginationState, setTotalPages } from './globals';
 import { createButtons } from './pagination';
+galleryBox = document.querySelector('.gallery__box');
+paginationBox = document.querySelector('.pagination');
 export async function createLibrary(key, page) {
+  galleryBox.innerHTML = '';
+  paginationBox.innerHTML = '';
+  showSpinner();
   const moviesPerPage = 20;
   const startIndex = (page - 1) * moviesPerPage;
 
