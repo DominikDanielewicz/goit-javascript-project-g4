@@ -1,6 +1,6 @@
 import { createGallery } from './create-gallery';
 import { fetchQuery, fetchTrending } from './fetch';
-import { PAGE, TOTAL_PAGES, PAGINATION_STATE, LAST_QUERY, PAGE_LIBRARY, setPage } from './globals';
+import { PAGE, TOTAL_PAGES, PAGINATION_STATE, LAST_QUERY, setPage } from './globals';
 import { createLibrary } from './create-library';
 const paginationList = document.querySelector('.pagination');
 
