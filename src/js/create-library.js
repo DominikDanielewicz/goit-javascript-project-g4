@@ -1,6 +1,6 @@
 import { fetchMovieById } from './fetch';
 import { createGallery } from './create-gallery';
-import { PAGE_LIBRARY, TOTAL_PAGES_LIBRARY, setPageLibrary, setTotalPagesLibrary, setPaginationState } from './globals';
+import { PAGE_LIBRARY, TOTAL_PAGES, PAGE, setPage, setPaginationState, setTotalPages } from './globals';
 import { createButtons } from './pagination';
 export async function createLibrary(key, page) {
   const moviesPerPage = 20;
@@ -13,12 +13,9 @@ export async function createLibrary(key, page) {
   const idsToFetch = movieIds.slice(startIndex, startIndex + moviesPerPage);
 
   const movies = await Promise.all(idsToFetch.map(fetchMovieById));
-
-  setTotalPagesLibrary(totalPages);
-  setPageLibrary(page);
-  console.log(PAGE_LIBRARY, TOTAL_PAGES_LIBRARY);
+  setTotalPages(totalPages);
   createGallery(movies);
-  createButtons(TOTAL_PAGES_LIBRARY, PAGE_LIBRARY);
+  createButtons(TOTAL_PAGES, PAGE);
 }
 
 if (window.location.pathname.indexOf('library.html') !== -1) {
