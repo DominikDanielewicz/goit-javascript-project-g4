@@ -1,23 +1,27 @@
 // utilities
 @import './utilities/variables';
 @import './utilities/mixins';
+@import './utilities/visibility';
 
 //base
 @import './base/reset';
 
-//layout
-@import './layout/container';
-@import './layout/header-home';
-@import './layout/header-library';
-@import './layout/gallery';
-@import './layout/footer';
-@import './layout/library-actions';
-@import './layout/main-section';
-
 //components
+@import './components/container';
+@import './components/header-home';
+@import './components/header-library';
+@import './components/gallery';
+@import './components/footer';
+@import './components/library-actions';
+@import './components/main-section';
+@import './components/pagination';
+@import './components/modal-container';
 @import './components/search-form';
 @import './components/card';
 @import './components/link';
 @import './components/logo';
 @import './components/navigation';
 @import './components/button';
+@import './components/modal-movie.scss';
+@import './components/spinner';
+@import './components/authors';

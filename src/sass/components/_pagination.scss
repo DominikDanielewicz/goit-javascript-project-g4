@@ -1,0 +1,77 @@
+.pagination {
+  @extend .container;
+  @include flexbox(row, nowrap, center, center);
+  gap: 6px;
+  margin-top: 40px;
+  @include media-query(tablet) {
+    margin-top: 50px;
+  }
+  @include media-query(desktop) {
+    margin-top: 50px;
+  }
+
+  &__button {
+    @include flexbox(row, nowrap, center, center);
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    @include transition(transform background-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+    @include font($font-stack, 12px, 500, 16px, $font-color-secondary);
+    &:active {
+      transform: scale(0.9);
+    }
+    &:hover,
+    &:focus,
+    &:focus-within {
+      outline: none;
+      border: none;
+      background-color: $accent-color;
+      @include transition(transform background-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+    }
+
+    &--arrow-left,
+    &--arrow-right {
+      @extend .pagination__button;
+      background-color: $background-color-secondary;
+    }
+
+    &--current {
+      @extend .pagination__button;
+      background-color: $accent-color;
+      color: $font-color-primary;
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    stroke: $font-color-secondary;
+    stroke-width: 2px;
+    fill: $font-color-secondary;
+    &--arrow-left {
+      @extend .pagination__icon;
+    }
+    &--arrow-right {
+      @extend .pagination__icon;
+      transform: rotate(180deg);
+    }
+  }
+  &__hidden-results {
+    cursor: default;
+    @include media-query(mobile) {
+      display: none;
+      visibility: hidden;
+    }
+    @include media-query(tablet) {
+      @include flexbox(row, nowrap, flex-start, flex-start);
+      visibility: visible;
+    }
+    @include media-query(desktop) {
+      @include flexbox(row, nowrap, flex-start, flex-start);
+      visibility: visible;
+    }
+  }
+}

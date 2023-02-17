@@ -1,0 +1,13 @@
+.header-library {
+  @extend .container;
+  @extend .header-home;
+  @include media-query(mobile) {
+    @include responsive-background-image('../images/hero-my-library-mobile');
+  }
+  @include media-query(tablet) {
+    @include responsive-background-image('../images/hero-my-library-tablet');
+  }
+  @include media-query(desktop) {
+    @include responsive-background-image('../images/hero-my-library-desktop');
+  }
+}
