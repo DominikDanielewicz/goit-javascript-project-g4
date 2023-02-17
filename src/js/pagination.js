@@ -2,7 +2,18 @@ import { createGallery } from './create-gallery';
 import { fetchQuery, fetchTrending } from './fetch';
 import { PAGE, TOTAL_PAGES, PAGINATION_STATE, LAST_QUERY, setPage } from './globals';
 import { createLibrary } from './create-library';
+import { hideSpinner, showSpinner } from './spinner';
+
 const paginationList = document.querySelector('.pagination');
+const galleryBox = document.querySelector('.gallery__box');
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 230,
+    left: 0,
+    behavior: 'smooth',
+  });
+}
 
 paginationList.addEventListener('click', event => {
   if (event.target.tagName === 'BUTTON') {
@@ -22,6 +33,7 @@ paginationList.addEventListener('click', event => {
       setPage(pageNumber);
       createLibrary(PAGINATION_STATE, pageNumber);
     }
+    scrollToTop();
   }
 });
 
