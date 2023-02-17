@@ -6,8 +6,6 @@ import { createButtons } from './pagination';
 const galleryBox = document.querySelector('.gallery__box');
 const paginationBox = document.querySelector('.pagination');
 export async function createLibrary(key, page) {
-  galleryBox.innerHTML = '';
-  paginationBox.innerHTML = '';
   showSpinner();
   const moviesPerPage = 20;
   const startIndex = (page - 1) * moviesPerPage;
