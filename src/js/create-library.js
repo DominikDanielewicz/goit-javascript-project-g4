@@ -1,6 +1,6 @@
 import { fetchMovieById } from './fetch';
 import { createGallery } from './create-gallery';
-import { PAGE_LIBRARY, TOTAL_PAGES_LIBRARY, setPageLibrary, setTotalPagesLibrary } from './globals';
+import { PAGE_LIBRARY, TOTAL_PAGES_LIBRARY, setPageLibrary, setTotalPagesLibrary, setPaginationState } from './globals';
 import { createButtons } from './pagination';
 export async function createLibrary(key, page) {
   const moviesPerPage = 20;
@@ -20,4 +20,8 @@ export async function createLibrary(key, page) {
   createGallery(movies);
   createButtons(TOTAL_PAGES_LIBRARY, PAGE_LIBRARY);
 }
-// createLibrary('watched', 1);
+
+if (window.location.pathname.indexOf('library.html') !== -1) {
+  createLibrary('watched', 1);
+  setPaginationState('watched');
+}

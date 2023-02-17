@@ -16,6 +16,7 @@ export let PAGE_LIBRARY = 1;
 // example: setPaginationState("trending")
 export const setPaginationState = flag => {
   PAGINATION_STATE = flag;
+  console.log(`pagination state changed to ${flag}`);
 };
 export const setLastQuery = query => {
   LAST_QUERY = query;

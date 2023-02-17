@@ -1,6 +1,7 @@
 import { fetchQuery } from './fetch';
 import { createGallery } from './create-gallery';
 import throttle from 'lodash/throttle';
+import { setPaginationState } from './globals';
 
 const searchForm = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-form__input');
@@ -14,5 +15,6 @@ searchForm.addEventListener('submit', event => {
   event.preventDefault();
 
   const query = searchInput.value;
+  setPaginationState('search');
   throttledFetch(query);
 });

@@ -50,4 +50,5 @@ if (window.location.pathname.indexOf('index.html') !== -1) {
   fetchTrending(1).then(data => {
     createGallery(data);
   });
+  setPaginationState('trending');
 }

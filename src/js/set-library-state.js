@@ -1,5 +1,5 @@
-import { setLibraryState, LIBRARY_STATE } from './globals';
-// import { createMovieGalleryFromLocalStorage } from './create-library-gallery';
+import { setLibraryState, LIBRARY_STATE, setPaginationState } from './globals';
+import { createLibrary } from './create-library';
 setLibraryState('watched');
 const libraryActions = document.querySelector('.library-actions');
 
@@ -16,11 +16,13 @@ function toggleActiveState(event) {
 
   if (clickedButton.textContent === 'Watched') {
     setLibraryState('watched');
+    setPaginationState('watched');
     console.log('library global state:', LIBRARY_STATE);
-    // createMovieGalleryFromLocalStorage('watched', 1);
+    createLibrary('watched', 1);
   } else if (clickedButton.textContent === 'Queue') {
     setLibraryState('queue');
-    // createMovieGalleryFromLocalStorage('queue', 1);
+    setPaginationState('queue');
+    createLibrary('queue', 1);
     console.log('library global state:', LIBRARY_STATE);
   }
 }

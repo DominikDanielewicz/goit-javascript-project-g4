@@ -9,15 +9,15 @@ paginationList.addEventListener('click', event => {
     const pageNumber = Number(event.target.dataset.page);
     if (PAGINATION_STATE === 'trending') {
       fetchTrending(pageNumber).then(data => {
-        console.log('trending');
         createGallery(data);
       });
     } else if (PAGINATION_STATE === 'search') {
       fetchQuery(LAST_QUERY, pageNumber).then(data => {
-        console.log('search');
         createGallery(data);
       });
     } else if (PAGINATION_STATE === 'watched') {
+      createLibrary(PAGINATION_STATE, PAGE_LIBRARY);
+    } else if (PAGINATION_STATE === 'queue') {
       createLibrary(PAGINATION_STATE, PAGE_LIBRARY);
     }
   }
