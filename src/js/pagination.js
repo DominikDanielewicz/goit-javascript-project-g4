@@ -1,6 +1,7 @@
 import { createGallery } from './create-gallery';
 import { fetchQuery, fetchTrending } from './fetch';
-import { PAGE, TOTAL_PAGES, PAGINATION_STATE, LAST_QUERY } from './globals';
+import { PAGE, TOTAL_PAGES, PAGINATION_STATE, LAST_QUERY, PAGE_LIBRARY } from './globals';
+import { createLibrary } from './create-library';
 const paginationList = document.querySelector('.pagination');
 
 paginationList.addEventListener('click', event => {
@@ -16,6 +17,8 @@ paginationList.addEventListener('click', event => {
         console.log('search');
         createGallery(data);
       });
+    } else if (PAGINATION_STATE === 'watched') {
+      createLibrary(PAGINATION_STATE, PAGE_LIBRARY);
     }
   }
 });
