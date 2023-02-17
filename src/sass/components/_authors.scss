@@ -5,10 +5,23 @@
     justify-content: center;
     align-items: center;
     top: 0;
-    background: rgba(gray, $alpha: 0.5);
+    background: rgba(#000, $alpha: 0.25);
     width: 100%;
     height: 100%;
-    animation: openBackdrop 1s linear forwards;
+    opacity: 1;
+    animation: openBackdrop 250ms;
+    padding: 30px;
+
+    @include media-query(mobile) {
+      padding: 10px;
+    }
+    @include media-query(tablet) {
+      padding: 20px;
+    }
+    @include media-query(desktop) {
+      padding: 30px;
+    }
+
     &.hidden {
       display: none;
     }
@@ -23,33 +36,45 @@
     display: block;
     //decorative
     background: white;
-    border-radius: 10px;
-    //hide corners from modal header
-    overflow: hidden;
-    //shadow
-    box-shadow: 11px 11px 40px -13px rgba(0, 0, 0, 0.73);
+    overflow-y: overlay;
+    opacity: 1;
+    max-height: 95vh;
+    padding: 50px 30px 40px;
+
+    @include media-query(mobile) {
+      max-width: max(100%, 280px);
+    }
+    @include media-query(tablet) {
+      max-width: 100%;
+    }
+    @include media-query(desktop) {
+      max-width: 100%;
+    }
   }
   &__list {
-    display: flex;
-    gap: 10px;
+    gap: 20px;
+    @include media-query(mobile) {
+      @include flexbox(column, wrap, center, center);
+    }
+    @include media-query(tablet) {
+      @include flexbox(row, wrap, center, center);
+    }
+    @include media-query(desktop) {
+      @include flexbox(row, wrap, center, center);
+    }
   }
 }
 
 .modal {
   &__header {
     @include flexbox();
-    background: #212121;
     letter-spacing: 5px;
-    text-decoration: underline 2px $accent-color;
     align-items: center;
     justify-content: center;
-    @include media-query(desktop) {
-      padding: 30px;
-    }
-    border-bottom: 3px solid $accent-color;
+    margin-bottom: 20px;
+
     &-title {
       @include font(Roboto, 24px, 700, 19px, $font-color-secondary);
-      color: white;
     }
   }
 
@@ -64,18 +89,17 @@
   &__button {
     width: 200px;
     height: 50px;
+    margin-top: 20px;
 
     @extend .button;
   }
 }
 
 .author {
-  border: 1px solid black;
+  border: 1px solid rgb(230, 230, 230);
   &__selfie {
-    @include media-query(desktop) {
-      max-width: 370px;
-      max-height: 200px;
-    }
+    max-width: 370px;
+    max-height: 200px;
   }
 
   &__desc {
@@ -94,12 +118,9 @@
 
 @keyframes openBackdrop {
   0% {
-    transform: scaleY(0.005) scaleX(0);
-  }
-  50% {
-    transform: scaleY(0.005) scaleX(1);
+    opacity: 0;
   }
   100% {
-    transform: scaleY(1) scaleX(1);
+    opacity: 1;
   }
 }
