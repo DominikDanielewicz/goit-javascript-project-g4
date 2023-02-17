@@ -5,7 +5,7 @@ import { hideSpinner, showSpinner } from './spinner';
 const basePosterUrl = 'https://image.tmdb.org/t/p/w500';
 const noPosterImage =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png';
-export async function createGallery(data) {
+export async function createGallery(data, key) {
   const galleryBox = document.querySelector('.gallery__box');
   let cards = '';
 
@@ -36,26 +36,26 @@ export async function createGallery(data) {
     let description =
       PAGINATION_STATE === 'watched' || PAGINATION_STATE === 'queue'
         ? `
-      <p class="card__description">
-        ${movieGenres} | ${year}
-        <span class="card__highlight">
-          ${movie.vote_average.toFixed(1)}
-        </span>
-      </p>`
+        <p class="card__description">
+          ${movieGenres} | ${year}
+          <span class="card__highlight">
+            ${movie.vote_average.toFixed(1)}
+          </span>
+        </p>`
         : `
-      <p class="card__description">
-        ${movieGenres} | ${year}
-      </p>`;
+        <p class="card__description">
+          ${movieGenres} | ${year}
+        </p>`;
 
     cards += `
-    <figure class="card" data-id="${movie.id}">
-      ${moviePoster}
-      <figcaption class="card__caption">
-        <p class="card__title">${title}</p>
-        ${description}
-      </figcaption>
-    </figure>
-  `;
+      <figure class="card" data-id="${movie.id}" data-key="${key}">
+        ${moviePoster}
+        <figcaption class="card__caption">
+          <p class="card__title">${title}</p>
+          ${description}
+        </figcaption>
+      </figure>
+    `;
   });
 
   galleryBox.innerHTML = cards;

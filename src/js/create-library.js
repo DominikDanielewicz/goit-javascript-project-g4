@@ -21,6 +21,7 @@ export async function createLibrary(key, page) {
 
   createGallery(
     movies.map(movie => ({
+      id: movie.id, // Add the movie id here
       title: movie.title,
       poster_path: movie.poster_path,
       release_date: movie.release_date,
