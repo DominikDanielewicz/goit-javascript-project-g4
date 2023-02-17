@@ -33,7 +33,9 @@ const fillMovieModalData = (id, movie) => {
   }
   title.textContent = movie.title;
   voteHighlight.textContent = movie.vote_average;
-  voteTotal.innerHTML = `<span class="stats-list__highlight">${movie.vote_average}</span> / ${movie.vote_count}`;
+  voteTotal.innerHTML = `<span class="stats-list__highlight">${movie.vote_average.toFixed(1)}</span> / ${
+    movie.vote_count
+  }`;
   popularity.textContent = movie.popularity;
   originalTitle.textContent = movie.original_title;
   genreList.textContent = genres;
