@@ -107,19 +107,3 @@ export async function fetchQuery(query, page) {
     console.error(error);
   }
 }
-
-export async function fetchMoviesFromStorage(storageKey) {
-  try {
-    const movieIds = JSON.parse(localStorage.getItem(storageKey));
-    const movies = [];
-
-    for (const id of movieIds) {
-      const movie = await fetchMovieById(id);
-      movies.push(movie);
-    }
-
-    return movies;
-  } catch (error) {
-    console.error(error);
-  }
-}

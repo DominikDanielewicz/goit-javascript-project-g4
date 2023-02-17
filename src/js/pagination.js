@@ -13,7 +13,7 @@ paginationList.addEventListener('click', event => {
       });
     } else if (PAGINATION_STATE === 'search') {
       fetchQuery(LAST_QUERY, pageNumber).then(data => {
-        console.log('query');
+        console.log('search');
         createGallery(data);
       });
     }

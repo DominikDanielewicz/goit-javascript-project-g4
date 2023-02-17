@@ -10,8 +10,6 @@ export let LIBRARY_STATE = 'watched';
 // to acces the variables you can simply read it after import
 // to edit the variable use the set functions below
 
-export const paginationList = document.querySelector('.pagination');
-
 // example: setPaginationState("trending")
 export const setPaginationState = flag => {
   PAGINATION_STATE = flag;
