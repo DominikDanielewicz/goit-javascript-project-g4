@@ -1,5 +1,6 @@
 import { fetchTrending, fetchQuery } from './fetch';
 import { setPaginationState } from './globals';
+import { hideSpinner, showSpinner } from './spinner';
 
 const basePosterUrl = 'https://image.tmdb.org/t/p/w500';
 const noPosterImage =
@@ -47,8 +48,10 @@ export async function createGallery(data) {
 }
 
 if (window.location.pathname.indexOf('index.html') !== -1) {
+  showSpinner();
   fetchTrending(1).then(data => {
     createGallery(data);
+    hideSpinner();
   });
   setPaginationState('trending');
 }
