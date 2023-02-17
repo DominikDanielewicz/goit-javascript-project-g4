@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix';
 const modalMovieButtons = document.querySelector('.modal-movie__buttons');
 
 modalMovieButtons.addEventListener('click', event => {
@@ -10,9 +11,9 @@ modalMovieButtons.addEventListener('click', event => {
     if (!watchedMovies.includes(movieId)) {
       watchedMovies.push(movieId);
       localStorage.setItem('watched', JSON.stringify(watchedMovies));
-      console.log(`Movie with ID ${movieId} has been added to watched.`);
+      Notify.success(`Movie has been added to watched.`);
     } else {
-      console.log(`Movie with ID ${movieId} already exists in watched.`);
+      Notify.info(`this movie already exists in your watched library.`);
     }
   } else if (button.textContent === 'ADD TO QUEUE') {
     let queuedMovies = JSON.parse(localStorage.getItem('queue')) || [];
@@ -20,9 +21,9 @@ modalMovieButtons.addEventListener('click', event => {
     if (!queuedMovies.includes(movieId)) {
       queuedMovies.push(movieId);
       localStorage.setItem('queue', JSON.stringify(queuedMovies));
-      console.log(`Movie with ID ${movieId} has been added to queue.`);
+      Notify.success(`Movie has been added to queue.`);
     } else {
-      console.log(`Movie with ID ${movieId} already exists in queue.`);
+      Notify.info(`Movie already exists in queue.`);
     }
   }
 });

@@ -1,3 +1,4 @@
+import { hideSpinner, showSpinner } from './spinner';
 import { fetchMovieById } from './fetch';
 import { createGallery } from './create-gallery';
 import { TOTAL_PAGES, PAGE, setPage, setPaginationState, setTotalPages } from './globals';
@@ -16,9 +17,11 @@ export async function createLibrary(key, page) {
   setTotalPages(totalPages);
   createGallery(movies);
   createButtons(TOTAL_PAGES, PAGE);
+  hideSpinner();
 }
 
 if (window.location.pathname.indexOf('library.html') !== -1) {
+  showSpinner();
   createLibrary('watched', 1);
   setPaginationState('watched');
 }
