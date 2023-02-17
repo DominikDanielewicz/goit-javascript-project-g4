@@ -1,9 +1,10 @@
 import { fetchTrending, fetchQuery } from './fetch';
+import { setPaginationState } from './globals';
 
 const basePosterUrl = 'https://image.tmdb.org/t/p/w500';
 const noPosterImage =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png';
-export async function createHomeGallery(data) {
+export async function createGallery(data) {
   const galleryBox = document.querySelector('.gallery__box');
   let cards = '';
 
@@ -32,7 +33,7 @@ export async function createHomeGallery(data) {
     }
 
     cards += `
-    <figure class="card" data-movie-id="${movie.id}">
+    <figure class="card" data-id="${movie.id}">
       ${moviePoster}
       <figcaption class="card__caption">
         <p class="card__title">${title}</p>
@@ -47,18 +48,6 @@ export async function createHomeGallery(data) {
 
 if (window.location.pathname.indexOf('index.html') !== -1) {
   fetchTrending(1).then(data => {
-    createHomeGallery(data);
+    createGallery(data);
   });
 }
-
-const searchForm = document.querySelector('.search-form');
-const searchInput = document.querySelector('.search-form__input');
-
-searchForm.addEventListener('submit', async event => {
-  event.preventDefault();
-
-  const query = searchInput.value;
-  const data = await fetchQuery(query, 1);
-  console.log('found data', data);
-  createHomeGallery(data);
-});

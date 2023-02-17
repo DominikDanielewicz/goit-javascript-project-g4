@@ -1,4 +1,14 @@
-import { APIKEY, setPage, setTotalPages, setPaginationState } from './globals';
+import {
+  APIKEY,
+  setPage,
+  setTotalPages,
+  setPaginationState,
+  setLastQuery,
+  TOTAL_PAGES,
+  PAGE,
+  PAGINATION_STATE,
+} from './globals';
+import { createButtons } from './pagination';
 // Function to call the API by movie ID and get a reponse with details
 // returns an object with details - genres are already resolved
 // id parameter needs to be a string
@@ -19,7 +29,6 @@ export async function fetchMovieById(id) {
             return genre.name;
           })
         : [];
-    console.log({ ...data, genre_ids: movieGenres });
     return { ...data, genre_ids: movieGenres };
   } catch (error) {
     console.error(error);
@@ -57,6 +66,8 @@ export async function fetchTrending(page) {
     const totalPages = Math.ceil(totalResults / 20); // 20 results per page
     setTotalPages(totalPages);
     setPaginationState('trending');
+    createButtons(TOTAL_PAGES, PAGE);
+    console.log(PAGINATION_STATE, 'page: ' + PAGE, 'total pages: ' + TOTAL_PAGES);
     return results;
   } catch (error) {
     console.error(error);
@@ -85,9 +96,29 @@ export async function fetchQuery(query, page) {
     });
     const totalResults = data.total_results;
     const totalPages = Math.ceil(totalResults / 20); // 20 results per page
+    setPage(page);
     setTotalPages(totalPages);
     setPaginationState('search');
+    setLastQuery(query);
+    createButtons(TOTAL_PAGES, PAGE);
+    console.log(PAGINATION_STATE, 'page: ' + PAGE, 'total pages: ' + TOTAL_PAGES);
     return results;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchMoviesFromStorage(storageKey) {
+  try {
+    const movieIds = JSON.parse(localStorage.getItem(storageKey));
+    const movies = [];
+
+    for (const id of movieIds) {
+      const movie = await fetchMovieById(id);
+      movies.push(movie);
+    }
+
+    return movies;
   } catch (error) {
     console.error(error);
   }
