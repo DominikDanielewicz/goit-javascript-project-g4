@@ -1,4 +1,4 @@
-import { setLibraryState, LIBRARY_STATE, setPaginationState } from './globals';
+import { setLibraryState, LIBRARY_STATE, setPaginationState, setPage } from './globals';
 import { createLibrary } from './create-library';
 setLibraryState('watched');
 const libraryActions = document.querySelector('.library-actions');
@@ -27,18 +27,3 @@ function toggleActiveState(event) {
   }
 }
 libraryActions.addEventListener('click', toggleActiveState);
-
-// function toggleButtonText(button) {
-//   if (button.textContent === 'ADD TO WATCHED') {
-//     button.textContent = 'REMOVE FROM WATCHED';
-//   } else if (button.textContent === 'REMOVE FROM WATCHED') {
-//     button.textContent = 'ADD TO WATCHED';
-//   } else if (button.textContent === 'ADD TO QUEUE') {
-//     button.textContent = 'REMOVE FROM QUEUE';
-//   } else if (button.textContent === 'REMOVE FROM QUEUE') {
-//     button.textContent = 'ADD TO QUEUE';
-//   }
-// }
-
-// const addToWatchedButton = document.querySelector('.modal-movie__button-add-to-watched');
-// toggleButtonText(addToWatchedButton);
