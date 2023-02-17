@@ -28,6 +28,15 @@
     padding-top: 10px;
     @include flexbox(column, nowrap, center, flex-start);
   }
+
+  &__highlight {
+    background-color: $accent-color;
+    border-radius: 5px;
+    padding: 1px 10px;
+    color: $font-color-primary;
+    margin-left: 5px;
+  }
+
   &__title {
     word-wrap: break-word;
     @include font(Roboto, 12px, 500, 14px, $font-color-secondary);

@@ -59,7 +59,11 @@ export const createfilmGalery = elem => {
   filmGalery.innerHTML = '';
   elem.map(async film => {
     let name = film.title;
-    let poster = film.poster_path;
+    let poster = `https://image.tmdb.org/t/p/w500${film.poster_path}`;
+    if (film.poster_path == null) {
+      poster =
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png';
+    }
     let filmId = film.id;
     let releseDate = film.release_date.slice(0, 4) || 'Sorry. No relase date yet.';
     let other;
@@ -84,7 +88,7 @@ export const createfilmGalery = elem => {
     }
 
     const galeryItem = `<figure class="card" data-id="${filmId}">
-<img class="card__image" src="https://image.tmdb.org/t/p/w500${poster}" alt="${name} movie poster" />
+<img class="card__image" src="${poster}" alt="${name} movie poster" />
 <figcaption class="card__caption">
   <p class="card__title">${name}</p>
   <p class="card__description">${newGenres + other} | ${releseDate}</p>
