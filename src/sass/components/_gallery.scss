@@ -1,6 +1,6 @@
 .gallery {
-  @extend .container;
-  @include flexbox(row, wrap, center, center);
+  @include flexbox(column, nowrap, center, center);
+  mid-width: $mobile;
   &__box {
     @include media-query(mobile) {
       max-width: 280px;
@@ -10,9 +10,6 @@
     }
     @include media-query(desktop) {
       max-width: 882px;
-    }
-    @include media-query(desktop-wide) {
-      max-width: 1186px;
     }
     @include flexbox(row, wrap, flex-start, center);
     gap: 30px;

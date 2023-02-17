@@ -1,0 +1,53 @@
+<div class="modal-container hidden">
+  <div class="modal-movie">
+    <button class="modal-movie__button-close">
+      <svg class="modal-movie__icon-close">
+        <use href="/src/images/icons.svg#close"></use>
+      </svg>
+    </button>
+    <div class="modal-movie__wrapper">
+      <img class="modal-movie__movie-poster" src="./images/img-placeholder.png" alt="no image found" />
+      <article class="modal-movie__info">
+        <h2 class="modal-movie__title">##</h2>
+        <div class="stats-list__box">
+          <ul class="stats-list">
+            <li>
+              <p>Vote / Votes</p>
+            </li>
+            <li>
+              <p>Popularity</p>
+            </li>
+            <li>
+              <p>Original title</p>
+            </li>
+            <li>
+              <p>Genre</p>
+            </li>
+          </ul>
+          <ul class="stats-list__values">
+            <li>
+              <p class="stats-list__vote-total"><span class="stats-list__highlight">/</span>total votes</p>
+            </li>
+            <li>
+              <p class="stats-list__popularity-count">###</p>
+            </li>
+            <li>
+              <p class="stats-list__original-title">###</p>
+            </li>
+            <li>
+              <p class="stats-list__genres">###</p>
+            </li>
+          </ul>
+        </div>
+        <div class="movie-description">
+          <h3 class="movie-description__heading">ABOUT</h3>
+          <p class="movie-description__plot">##</p>
+        </div>
+        <div class="modal-movie__buttons">
+          <button class="modal-movie__button-add-to-watched" data-id="0">ADD TO WATCHED</button>
+          <button class="modal-movie__button-add-to-queue" data-id="0">ADD TO QUEUE</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

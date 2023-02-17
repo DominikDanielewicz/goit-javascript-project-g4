@@ -1,14 +1,12 @@
 <main class="main-section">
   <section class="gallery">
-    <!-- gallery box is added to center fixed width cards on the screen, since flex-basis doesnt get the -->
-    <div class="gallery__box">
-      <figure class="card">
-        <img class="card__image" src="#" alt="card template" />
-        <figcaption class="card__caption">
-          <p class="card__title">card title</p>
-          <p class="card__description">card | description</p>
-        </figcaption>
-      </figure>
+    <div class="spinner hidden">
+      <svg>
+        <use href="/src/images/icons.svg#spinner"></use>
+      </svg>
     </div>
+    <h1 class="hidden">FILMOTEKA</h1>
+    <div class="gallery__box"></div>
+    <div class="pagination" data-search=""></div>
   </section>
 </main>

@@ -3,7 +3,11 @@
   justify-content: center;
   align-items: center;
   margin-top: 41px;
-
+  &:focus-within button {
+    stroke: $accent-color;
+    transition: transform 250ms;
+    transform: scale(1.7);
+  }
   &__container {
     position: relative;
   }
@@ -46,7 +50,7 @@
     top: 0;
     border: none;
     background: none;
-
+    transition: transform 250ms;
     outline: none;
     &:hover .search-form__submit-icon {
       stroke: $accent-color;

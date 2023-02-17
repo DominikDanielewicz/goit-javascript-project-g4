@@ -1,5 +1,4 @@
 .container {
-  padding: 0 20px;
   min-width: $mobile;
   @include media-query(mobile) {
     padding: 0 20px;

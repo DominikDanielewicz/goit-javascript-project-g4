@@ -1,0 +1,30 @@
+.modal-container {
+  @extend .container;
+  @include flexbox(row, nowrap, center, center);
+  position: fixed;
+  min-width: $mobile;
+  @include media-query(mobile) {
+    @include flexbox(column, nowrap, flex-start, flex-start);
+    top: 20px;
+  }
+  @include media-query(tablet) {
+    @include flexbox(row, nowrap, flex-start, flex-start);
+    top: 230px;
+  }
+  @include media-query(desktop) {
+    @include flexbox(row, nowrap, flex-start, flex-start);
+    top: 230px;
+  }
+  transition: visibility 250ms ease-in-out, opacity 250ms ease-in-out;
+  &::after {
+    content: '';
+    opacity: 0.25;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+  }
+}
