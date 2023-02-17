@@ -1,5 +1,5 @@
 import { fetchTrending, fetchQuery } from './fetch';
-import { setPaginationState } from './globals';
+import { PAGINATION_STATE, setPaginationState } from './globals';
 import { hideSpinner, showSpinner } from './spinner';
 
 const basePosterUrl = 'https://image.tmdb.org/t/p/w500';
@@ -33,12 +33,26 @@ export async function createGallery(data) {
       moviePoster = `<img class="card__image" src="${noPosterImage}" alt="${movie.title}" />`;
     }
 
+    let description =
+      PAGINATION_STATE === 'watched' || PAGINATION_STATE === 'queue'
+        ? `
+      <p class="card__description">
+        ${movieGenres} | ${year}
+        <span class="card__highlight">
+          ${movie.vote_average.toFixed(1)}
+        </span>
+      </p>`
+        : `
+      <p class="card__description">
+        ${movieGenres} | ${year}
+      </p>`;
+
     cards += `
     <figure class="card" data-id="${movie.id}">
       ${moviePoster}
       <figcaption class="card__caption">
         <p class="card__title">${title}</p>
-        <p class="card__description">${movieGenres} | ${year}</p>
+        ${description}
       </figcaption>
     </figure>
   `;
