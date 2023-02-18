@@ -19,12 +19,16 @@ paginationList.addEventListener('click', event => {
   if (event.target.tagName === 'BUTTON') {
     const pageNumber = Number(event.target.dataset.page);
     if (PAGINATION_STATE === 'trending') {
+      showSpinner();
       fetchTrending(pageNumber).then(data => {
         createGallery(data);
+        hideSpinner();
       });
     } else if (PAGINATION_STATE === 'search') {
+      showSpinner();
       fetchQuery(LAST_QUERY, pageNumber).then(data => {
         createGallery(data);
+        hideSpinner();
       });
     } else if (PAGINATION_STATE === 'watched') {
       setPage(pageNumber);
