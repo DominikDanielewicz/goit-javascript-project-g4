@@ -89,7 +89,7 @@
   &__button-add-to-watched {
     @extend .button;
     padding: 14px 7px 12px 7px;
-    max-width: 136px;
+    max-width: max(136px, 30%);
     background-color: #fff;
     border: 1px solid black;
     color: $font-color-secondary;
@@ -98,7 +98,7 @@
   &__button-add-to-queue {
     @extend .button;
     padding: 14px 7px 12px 7px;
-    max-width: 136px;
+    max-width: max(136px, 30%);
     background-color: #fff;
     border: 1px solid black;
     color: $font-color-secondary;
