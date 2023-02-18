@@ -59,7 +59,6 @@ export async function fetchTrending(page) {
     const totalPages = Math.ceil(totalResults / 20); // 20 results per page
     setTotalPages(totalPages);
     createButtons(TOTAL_PAGES, PAGE);
-    console.log(PAGINATION_STATE, 'page: ' + PAGE, 'total pages: ' + TOTAL_PAGES);
     return results;
   } catch (error) {
     console.error(error);
@@ -100,7 +99,6 @@ export async function fetchQuery(query, page) {
     setTotalPages(totalPages);
     setLastQuery(query);
     createButtons(TOTAL_PAGES, PAGE);
-    console.log(PAGINATION_STATE, 'page: ' + PAGE, 'total pages: ' + TOTAL_PAGES);
     return results;
   } catch (error) {
     console.error(error);

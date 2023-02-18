@@ -17,13 +17,11 @@ function toggleActiveState(event) {
   if (clickedButton.textContent === 'Watched') {
     setLibraryState('watched');
     setPaginationState('watched');
-    console.log('library global state:', LIBRARY_STATE);
     createLibrary('watched', 1);
   } else if (clickedButton.textContent === 'Queue') {
     setLibraryState('queue');
     setPaginationState('queue');
     createLibrary('queue', 1);
-    console.log('library global state:', LIBRARY_STATE);
   }
 }
 libraryActions.addEventListener('click', toggleActiveState);
