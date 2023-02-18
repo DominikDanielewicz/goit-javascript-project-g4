@@ -1,20 +1,25 @@
 .spinner {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  svg {
+  transition: visibility 250ms ease-in-out, opacity 250ms ease-in-out;
+  &__box {
+    background-color: #000000d8;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 1px rgba(0, 0, 0, 0.308) solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__icon {
+    border-radius: 50%;
     width: 80px;
     height: 80px;
     animation: rotate 1s linear infinite;
-    fill: #212121;
-  }
-  .hidden {
-    display: none;
-  }
-
-  .show {
-    display: flex;
+    fill: #f7e4d9;
   }
 }
 
