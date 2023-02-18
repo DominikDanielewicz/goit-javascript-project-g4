@@ -61,7 +61,7 @@ export async function createGallery(data, key) {
   galleryBox.innerHTML = cards;
 }
 
-if ((PAGINATION_STATE = 'trending')) {
+if (PAGINATION_STATE === 'trending') {
   showSpinner();
   fetchTrending(1).then(data => {
     createGallery(data);
