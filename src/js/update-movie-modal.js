@@ -5,6 +5,8 @@ import {
   removeMovieFromWatched,
   removeMovieFromQueue,
 } from './handle-local-storage';
+import { createLibrary } from './create-library';
+import { LIBRARY_STATE, setPaginationState } from './globals';
 
 const gallery = document.querySelector('.gallery__box');
 const partToFill = document.querySelector('.modal-movie__wrapper');
@@ -78,6 +80,11 @@ watchedButton.addEventListener('click', function () {
     addMovieToWatched(getButtonMovieId(watchedButton));
     toggleButtonText(watchedButton);
   }
+
+  if (window.location.pathname.indexOf('library.html') !== -1 && LIBRARY_STATE === 'watched') {
+    createLibrary('watched', 1);
+    setPaginationState('watched');
+  }
 });
 
 queueButton.addEventListener('click', function () {
@@ -87,6 +94,11 @@ queueButton.addEventListener('click', function () {
   } else {
     addMovieToQueue(getButtonMovieId(queueButton));
     toggleButtonText(queueButton);
+  }
+
+  if (window.location.pathname.indexOf('library.html') !== -1 && LIBRARY_STATE === 'queue') {
+    createLibrary('queue', 1);
+    setPaginationState('queue');
   }
 });
 

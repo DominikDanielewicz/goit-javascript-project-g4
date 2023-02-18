@@ -11,7 +11,6 @@ import {
 import { createButtons } from './pagination';
 import { createGallery } from './create-gallery';
 import { Notify } from 'notiflix';
-import { createGallery } from './create-gallery';
 // Function to call the API by movie ID and get a reponse with details
 // returns an object with details - genres are already resolved
 // id parameter needs to be a string
