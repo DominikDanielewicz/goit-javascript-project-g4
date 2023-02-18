@@ -18,7 +18,18 @@ export async function createLibrary(key, page) {
 
   const movies = await Promise.all(idsToFetch.map(fetchMovieById));
   setTotalPages(totalPages);
-  createGallery(movies);
+
+  createGallery(
+    movies.map(movie => ({
+      id: movie.id, // Add the movie id here
+      title: movie.title,
+      poster_path: movie.poster_path,
+      release_date: movie.release_date,
+      genre_ids: movie.genre_ids,
+      vote_average: movie.vote_average,
+    }))
+  );
+
   createButtons(TOTAL_PAGES, PAGE);
   hideSpinner();
 }
