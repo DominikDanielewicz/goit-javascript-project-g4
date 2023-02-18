@@ -61,7 +61,7 @@ export async function createGallery(data, key) {
   galleryBox.innerHTML = cards;
 }
 
-if (window.location.pathname.indexOf('index.html') !== -1) {
+if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
   showSpinner();
   fetchTrending(1).then(data => {
     createGallery(data);
