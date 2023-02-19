@@ -5,10 +5,10 @@ const spinner = document.querySelector('.spinner');
 
 //showing spinner
 const showSpinner = () => {
-  spinner.classList.replace('hidden', 'show');
+  spinner.classList.remove('hidden');
 };
 
 //hide spinner
 const hideSpinner = () => {
-  spinner.classList.replace('show', 'hidden');
+  spinner.classList.add('hidden');
 };
