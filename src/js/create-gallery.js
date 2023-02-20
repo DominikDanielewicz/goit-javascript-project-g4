@@ -28,9 +28,11 @@ export async function createGallery(data, key) {
     }
     let moviePoster = '';
     if (movie.poster_path) {
-      moviePoster = `<img class="card__image" src="${basePosterUrl + movie.poster_path}" alt="${movie.title}" />`;
+      moviePoster = `<img class="card__image" src="${basePosterUrl + movie.poster_path}" alt="${
+        movie.title
+      }" load="lazy"/>`;
     } else {
-      moviePoster = `<img class="card__image" src="${noPosterImage}" alt="${movie.title}" />`;
+      moviePoster = `<img class="card__image" src="${noPosterImage}" alt="${movie.title}" loading="lazy"/>`;
     }
 
     let description =
@@ -59,6 +61,39 @@ export async function createGallery(data, key) {
   });
 
   galleryBox.innerHTML = cards;
+  const images = document.querySelectorAll('.card__image');
+
+  images.forEach(image => {
+    // create a container wrapper on every image
+    const container = document.createElement('div');
+    container.className = 'image-container';
+    image.parentNode.insertBefore(container, image);
+    container.appendChild(image);
+
+    // create spinner and add it to a container
+    const spinner = document.createElement('div');
+    spinner.className = 'spinner__image';
+    container.appendChild(spinner);
+
+    // function to show spinner and remove loadstart event listener
+    function showSpinner() {
+      spinner.style.display = 'block';
+      image.removeEventListener('loadstart', showSpinner);
+    }
+
+    // show spinner on loadstart
+    image.addEventListener('loadstart', showSpinner);
+
+    // function to hide spinner and remove load event listener
+    function hideSpinner() {
+      spinner.style.display = 'none';
+      spinner.parentNode.removeChild(spinner);
+      image.removeEventListener('load', hideSpinner);
+    }
+
+    // hide spinner on complete load
+    image.addEventListener('load', hideSpinner);
+  });
 }
 
 if (PAGINATION_STATE === 'trending' && window.location.pathname.indexOf('library.html') === -1) {
@@ -69,3 +104,4 @@ if (PAGINATION_STATE === 'trending' && window.location.pathname.indexOf('library
   });
   setPaginationState('trending');
 }
+//
