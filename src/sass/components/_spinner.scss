@@ -1,9 +1,20 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .spinner {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: visibility 250ms ease-in-out, opacity 250ms ease-in-out;
+  z-index: 5;
+
   &__box {
     background-color: #000000d8;
     width: 110px;
@@ -22,12 +33,18 @@
     fill: #f7e4d9;
   }
 }
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.image-container {
+  position: relative;
+}
+.spinner__image {
+  border: 5px solid rgba(0, 0, 0, 0.171);
+  border-top: 5px solid $accent-color;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: rotate 1s linear infinite;
+  position: absolute;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+  transform: translate(-50%, -50%);
 }
