@@ -1,6 +1,6 @@
 .modal-container {
   @extend .container;
-  @include flexbox(row, nowrap, center, center);
+  @include flexbox(row, nowrap, center, normal);
   position: fixed;
   min-width: $mobile;
   @include media-query(mobile) {
@@ -9,7 +9,8 @@
   }
   @include media-query(tablet) {
     @include flexbox(row, nowrap, flex-start, flex-start);
-    top: 14vh;
+    align-items: center;
+    top: 50%;
   }
   @include media-query(desktop) {
     @include flexbox(row, nowrap, flex-start, flex-start);
