@@ -9,7 +9,10 @@ export async function createGallery(data, key) {
   let cards = '';
 
   data.forEach(movie => {
+    //initialize movie genres to Unknown
     let movieGenres = 'Unknown';
+
+    //if genre ID exists and length is more than 0, assign movieGenres to either the first two IDs or IDs plus 'other'
     if (movie.genre_ids && movie.genre_ids.length) {
       if (movie.genre_ids.length > 2) {
         movieGenres = movie.genre_ids.slice(0, 2).join(', ') + ', Other';
@@ -18,13 +21,17 @@ export async function createGallery(data, key) {
       }
     }
 
+    //get the release year from the release date
     const year = movie.release_date.slice(0, 4);
 
+    //assign title with some basic validation
     let title = movie.title;
     if (title.length > 35) {
       const lastSpaceIndex = title.lastIndexOf(' ', 32);
       title = title.slice(0, lastSpaceIndex) + '...';
     }
+
+    //assign the movie poster with validation
     let moviePoster = '';
     if (movie.poster_path) {
       moviePoster = `<img class="card__image" src="${basePosterUrl + movie.poster_path}" alt="${
@@ -34,29 +41,27 @@ export async function createGallery(data, key) {
       moviePoster = `<img class="card__image" src="${noPosterImage}" alt="${movie.title}" loading="lazy"/>`;
     }
 
+    //assign the movie description with validation
     let description =
       PAGINATION_STATE === 'watched' || PAGINATION_STATE === 'queue'
-        ? `
-        <p class="card__description">
-          ${movieGenres} | ${year}
-          <span class="card__highlight">
-            ${movie.vote_average.toFixed(1)}
-          </span>
-        </p>`
-        : `
-        <p class="card__description">
-          ${movieGenres} | ${year}
-        </p>`;
+        ? `<p class="card__description">
+        ${movieGenres} | ${year}
+        <span class="card__highlight">
+          ${movie.vote_average.toFixed(1)}
+        </span>
+      </p>`
+        : `<p class="card__description">
+        ${movieGenres} | ${year}
+      </p>`;
 
-    cards += `
-      <figure class="card" data-id="${movie.id}" data-key="${key}">
-        ${moviePoster}
-        <figcaption class="card__caption">
-          <p class="card__title">${title}</p>
-          ${description}
-        </figcaption>
-      </figure>
-    `;
+    //append card html to string
+    cards += `<figure class="card" data-id="${movie.id}" data-key="${key}">
+    ${moviePoster}
+    <figcaption class="card__caption">
+      <p class="card__title">${title}</p>
+      ${description}
+    </figcaption>
+  </figure>`;
   });
 
   galleryBox.innerHTML = cards;
@@ -95,10 +100,12 @@ export async function createGallery(data, key) {
   });
 }
 
+// Check if the pagination state is set to 'trending' and make sure we are not on the library page
 if (PAGINATION_STATE === 'trending' && window.location.pathname.indexOf('library.html') === -1) {
+  // Fetch trending movies and create the relevant gallery
   fetchTrending(1).then(data => {
     createGallery(data);
   });
+  // Set the pagination state to 'trending'
   setPaginationState('trending');
 }
-//

@@ -69,15 +69,18 @@ export async function fetchTrending(page) {
 export async function fetchQuery(query, page) {
   try {
     showSpinner();
+    // Fetch data from api
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${query}&page=${page}`
     );
     const data = await response.json();
 
+    // Fetch genres for the movie
     const genresResponse = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${APIKEY}`);
     const genresData = await genresResponse.json();
     const genres = genresData.genres;
 
+    // Map the results array with genre names
     const results = data.results.map(movie => {
       const movieGenres = movie.genre_ids.map(genreId => {
         const genre = genres.find(g => g.id === genreId);
@@ -85,6 +88,8 @@ export async function fetchQuery(query, page) {
       });
       return { ...movie, genre_ids: movieGenres };
     });
+
+    // Set totalResults variable
     const totalResults = data.total_results;
     if (totalResults < 1) {
       Notify.failure(`Sorry, no movie found matching your search`, {
@@ -94,12 +99,20 @@ export async function fetchQuery(query, page) {
         createGallery(data);
       });
     }
+
+    // Calculate totalPages for pagination
     const totalPages = Math.ceil(totalResults / 20); // 20 results per page
+
+    // Set page and totalPages variables
     setPage(page);
     setTotalPages(totalPages);
     setLastQuery(query);
     createButtons(TOTAL_PAGES, PAGE);
+
+    // Hide loading spinner
     hideSpinner();
+
+    // Return the final result
     return results;
   } catch (error) {
     hideSpinner();
