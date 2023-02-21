@@ -9,7 +9,7 @@
   }
   @include media-query(tablet) {
     @include flexbox(row, nowrap, flex-start, flex-start);
-    top: 230px;
+    top: 14vh;
   }
   @include media-query(desktop) {
     @include flexbox(row, nowrap, flex-start, flex-start);
