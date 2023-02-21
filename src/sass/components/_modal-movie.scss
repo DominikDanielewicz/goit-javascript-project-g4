@@ -59,6 +59,7 @@
     @include transition(stroke stroke-width, 0.35s, ease-in-out, 0s);
   }
   &__movie-poster {
+    position: relative;
     background-color: $background-color-secondary;
     border-radius: 5px;
     @include media-query(mobile) {

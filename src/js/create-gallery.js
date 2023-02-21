@@ -1,6 +1,5 @@
 import { fetchTrending, fetchQuery } from './fetch';
 import { PAGINATION_STATE, setPaginationState } from './globals';
-import { hideSpinner, showSpinner } from './spinner';
 
 const basePosterUrl = 'https://image.tmdb.org/t/p/w500';
 const noPosterImage =
@@ -30,7 +29,7 @@ export async function createGallery(data, key) {
     if (movie.poster_path) {
       moviePoster = `<img class="card__image" src="${basePosterUrl + movie.poster_path}" alt="${
         movie.title
-      }" load="lazy"/>`;
+      }" loading="lazy"/>`;
     } else {
       moviePoster = `<img class="card__image" src="${noPosterImage}" alt="${movie.title}" loading="lazy"/>`;
     }
@@ -97,10 +96,8 @@ export async function createGallery(data, key) {
 }
 
 if (PAGINATION_STATE === 'trending' && window.location.pathname.indexOf('library.html') === -1) {
-  showSpinner();
   fetchTrending(1).then(data => {
     createGallery(data);
-    hideSpinner();
   });
   setPaginationState('trending');
 }
