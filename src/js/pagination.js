@@ -4,9 +4,11 @@ import { PAGE, TOTAL_PAGES, PAGINATION_STATE, LAST_QUERY, setPage } from './glob
 import { createLibrary } from './create-library';
 import { hideSpinner, showSpinner } from './spinner';
 
+// Get references to DOM elements
 const paginationList = document.querySelector('.pagination');
 const galleryBox = document.querySelector('.gallery__box');
 
+// Function to scroll to the top of the page
 function scrollToTop() {
   window.scrollTo({
     top: 230,
@@ -15,9 +17,11 @@ function scrollToTop() {
   });
 }
 
+// Event listener for pagination buttons
 paginationList.addEventListener('click', event => {
   if (event.target.tagName === 'BUTTON') {
     const pageNumber = Number(event.target.dataset.page);
+    // Handle different pagination states
     if (PAGINATION_STATE === 'trending') {
       showSpinner();
       fetchTrending(pageNumber).then(data => {
@@ -37,31 +41,37 @@ paginationList.addEventListener('click', event => {
       setPage(pageNumber);
       createLibrary(PAGINATION_STATE, pageNumber);
     }
+    // Scroll to the top of the page
     scrollToTop();
   }
 });
 
 export function createButtons(TOTAL_PAGES, PAGE) {
-  let liTag = '';
+  let paginationButton = '';
   let beforePage = PAGE - 1;
   let afterPage = PAGE + 1;
-  let activeLi;
+  let activeButton;
 
+  // Adds a button to go to the previous page if the current page is greater than 1
   if (PAGE > 1) {
-    liTag += `<button class="pagination__button--arrow-left" data-page="${PAGE - 1}">
+    paginationButton += `<button class="pagination__button--arrow-left" data-page="${PAGE - 1}">
   <i style="pointer-events: none" class="fa-solid fa-arrow-left"></i>
 </button>`;
   }
 
-  // if there's more then 6 page
+  // If there are more than 6 pages, generate the pagination buttons
   if (TOTAL_PAGES > 6) {
+    // If the current page is greater than 3, add a button to go to the first page
     if (PAGE > 3) {
-      liTag += `<button class="pagination__button" type="button" data-page="1">1</button>`;
+      paginationButton += `<button class="pagination__button" type="button" data-page="1">1</button>`;
+
+      // If the current page is greater than 4, add a span element with ellipses to indicate hidden results
       if (PAGE > 4) {
-        liTag += `<span class="pagination__hidden-results">&middot&middot&middot</span>`;
+        paginationButton += `<span class="pagination__hidden-results">&middot&middot&middot</span>`;
       }
     }
 
+    // Determine which page numbers to show before and after the current page based on the current page number
     if (PAGE === TOTAL_PAGES) {
       beforePage = beforePage - 1;
     } else if (PAGE === TOTAL_PAGES - 1) {
@@ -77,6 +87,7 @@ export function createButtons(TOTAL_PAGES, PAGE) {
       afterPage = afterPage + 1;
     }
 
+    // Generate pagination buttons for each page between beforePage and afterPage
     for (let pageLength = beforePage; pageLength <= afterPage; pageLength++) {
       if (pageLength > TOTAL_PAGES) {
         continue;
@@ -88,37 +99,43 @@ export function createButtons(TOTAL_PAGES, PAGE) {
         pageLength = pageLength + 1;
       }
 
+      // Add a class to the button to indicate if it's the currently active page
       if (PAGE == pageLength) {
-        activeLi = 'pagination__button--current';
+        activeButton = 'pagination__button--current';
       } else {
-        activeLi = '';
+        activeButton = '';
       }
-      liTag += `<button class="${activeLi} pagination__button" type="button" data-page="${pageLength}">${pageLength}</button>`;
+      paginationButton += `<button class="${activeButton} pagination__button" type="button" data-page="${pageLength}">${pageLength}</button>`;
     }
+
+    // If the current page is less than the total pages minus 2, add a button to go to the last page
     if (PAGE < TOTAL_PAGES - 2) {
       if (PAGE < TOTAL_PAGES - 3) {
-        liTag += `<span class="pagination__hidden-results">&middot&middot&middot</span>`;
+        paginationButton += `<span class="pagination__hidden-results">&middot&middot&middot</span>`;
       }
-      liTag += `<button class="pagination__button" type="button" data-page="${TOTAL_PAGES}">${TOTAL_PAGES}</button>`;
-    }
-  }
-  // if there's less then 6 page
-  else {
-    for (let pageLength = 1; pageLength <= TOTAL_PAGES; pageLength++) {
-      if (PAGE == pageLength) {
-        activeLi = 'pagination__button--current';
-      } else {
-        activeLi = '';
-      }
-      liTag += `<button class="${activeLi} pagination__button" type="button" data-page="${pageLength}">${pageLength}</button>`;
+      paginationButton += `<button class="pagination__button" type="button" data-page="${TOTAL_PAGES}">${TOTAL_PAGES}</button>`;
     }
   }
 
+  // If there are less than 6 pages, generate the pagination buttons for all pages
+  else {
+    for (let pageLength = 1; pageLength <= TOTAL_PAGES; pageLength++) {
+      if (PAGE == pageLength) {
+        activeButton = 'pagination__button--current';
+      } else {
+        activeButton = '';
+      }
+      paginationButton += `<button class="${activeButton} pagination__button" type="button" data-page="${pageLength}">${pageLength}</button>`;
+    }
+  }
+
+  // Add a button with a right arrow icon if the current page is not the last
   if (PAGE < TOTAL_PAGES) {
-    liTag += `<button class="pagination__button--arrow-right" data-page="${PAGE + 1}">
+    paginationButton += `<button class="pagination__button--arrow-right" data-page="${PAGE + 1}">
   <i style="pointer-events: none" class="fa-solid fa-arrow-right"></i>
 </button>`;
   }
 
-  paginationList.innerHTML = liTag;
+  // Fill the button container with buttons
+  paginationList.innerHTML = paginationButton;
 }
