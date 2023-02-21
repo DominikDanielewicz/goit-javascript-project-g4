@@ -1,5 +1,5 @@
 .main-section {
-  min-width: $mobile;
+  min-width: calc($mobile - 40px);
   padding-top: 60px;
   padding-bottom: 50px;
   background: $background-color-primary;

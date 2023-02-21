@@ -8,14 +8,17 @@ import {
   PAGE,
   PAGINATION_STATE,
 } from './globals';
+import { showSpinner, hideSpinner } from './spinner';
 import { createButtons } from './pagination';
 import { createGallery } from './create-gallery';
 import { Notify } from 'notiflix';
+
 // Function to call the API by movie ID and get a reponse with details
 // returns an object with details - genres are already resolved
 // id parameter needs to be a string
 const paginationBox = document.querySelector('.pagination');
 export async function fetchMovieById(id) {
+  showSpinner();
   try {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`);
     const data = await response.json();
@@ -32,6 +35,7 @@ export async function fetchMovieById(id) {
 }
 
 export async function fetchTrending(page) {
+  showSpinner();
   try {
     const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}&page=${page}`);
     const data = await response.json();
@@ -52,8 +56,10 @@ export async function fetchTrending(page) {
     const totalPages = Math.ceil(totalResults / 20); // 20 results per page
     setTotalPages(totalPages);
     createButtons(TOTAL_PAGES, PAGE);
+    hideSpinner();
     return results;
   } catch (error) {
+    hideSpinner();
     console.error(error);
   }
 }
@@ -62,6 +68,7 @@ export async function fetchTrending(page) {
 // returns an array of objects with movie data based on a query
 export async function fetchQuery(query, page) {
   try {
+    showSpinner();
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${query}&page=${page}`
     );
@@ -92,8 +99,10 @@ export async function fetchQuery(query, page) {
     setTotalPages(totalPages);
     setLastQuery(query);
     createButtons(TOTAL_PAGES, PAGE);
+    hideSpinner();
     return results;
   } catch (error) {
+    hideSpinner();
     console.error(error);
   }
 }

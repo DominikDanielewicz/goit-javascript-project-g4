@@ -7,14 +7,16 @@ import {
 } from './handle-local-storage';
 import { createLibrary } from './create-library';
 import { LIBRARY_STATE, setPaginationState } from './globals';
+import { showSpinner, hideSpinner } from './spinner';
 
 const gallery = document.querySelector('.gallery__box');
 const partToFill = document.querySelector('.modal-movie__wrapper');
 const modalElement = document.querySelector('.modal-container');
 const modalCloseElement = document.querySelector('.modal-movie__button-close');
+const modalImage = modalElement.querySelector('.modal-movie__movie-poster');
 const baseURL = 'http://image.tmdb.org/t/p/w500';
 
-const fillMovieModalData = (id, movie) => {
+const fillMovieModalData = (id, movie, imageUrl) => {
   const genres = movie.genres.map(genre => genre.name).join(', ');
 
   const poster = modalElement.querySelector('.modal-movie__movie-poster');
@@ -28,13 +30,8 @@ const fillMovieModalData = (id, movie) => {
   const watchedButton = modalElement.querySelector('.modal-movie__button-add-to-watched');
   const queueButton = modalElement.querySelector('.modal-movie__button-add-to-queue');
 
-  if (movie.poster_path) {
-    poster.src = `${baseURL + movie.poster_path}`;
-  } else {
-    const defaultImageURL =
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png';
-    poster.src = defaultImageURL;
-  }
+  poster.src = imageUrl;
+
   title.textContent = movie.title;
   voteHighlight.textContent = movie.vote_average;
   voteTotal.innerHTML = `<span class="stats-list__highlight">${movie.vote_average.toFixed(1)}</span> / ${
@@ -46,6 +43,7 @@ const fillMovieModalData = (id, movie) => {
   description.textContent = movie.overview;
   watchedButton.dataset.id = id;
   queueButton.dataset.id = id;
+  hideSpinner();
 };
 
 const watchedButton = document.querySelector('.modal-movie__button-add-to-watched');
@@ -108,6 +106,7 @@ const getButtonMovieId = button => {
 
 function onEscapeKeydown(event) {
   if (event.key === 'Escape') {
+    hideSpinner();
     modalElement.classList.add('hidden');
     document.removeEventListener('keydown', onEscapeKeydown);
   }
@@ -118,9 +117,16 @@ function handleGalleryClick(event) {
   if (target) {
     const id = target.dataset.id;
 
+    // Get the URL of the clicked image
+
+    const posterUrl = target.querySelector('.card__image').getAttribute('src');
+    modalImage.setAttribute('src', posterUrl);
+
+    // Use the URL to fill the modal data
     fetchMovieById(id).then(movie => {
-      fillMovieModalData(id, movie);
+      fillMovieModalData(id, movie, posterUrl);
     });
+
     modalElement.classList.remove('hidden');
     document.addEventListener('keydown', onEscapeKeydown);
     gallery.removeEventListener('click', handleGalleryClick);
@@ -131,8 +137,10 @@ gallery.addEventListener('click', event => {
   const target = event.target.closest('.card');
   if (target) {
     const id = target.dataset.id;
+    const posterUrl = target.querySelector('.card__image').getAttribute('src');
+    modalImage.setAttribute('src', posterUrl);
     fetchMovieById(id).then(movie => {
-      fillMovieModalData(id, movie);
+      fillMovieModalData(id, movie, posterUrl);
       if (isMovieInWatched(getButtonMovieId(watchedButton))) {
         watchedButton.innerHTML = 'REMOVE FROM WATCHED';
       } else {
@@ -151,6 +159,7 @@ gallery.addEventListener('click', event => {
 });
 
 modalCloseElement.addEventListener('click', event => {
+  hideSpinner();
   modalElement.classList.add('hidden');
   document.removeEventListener('keydown', onEscapeKeydown);
   gallery.addEventListener('click', handleGalleryClick);

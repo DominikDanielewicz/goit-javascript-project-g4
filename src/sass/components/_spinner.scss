@@ -6,14 +6,30 @@
     transform: rotate(360deg);
   }
 }
-
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
 .spinner {
+  visibility: hidden;
+  opacity: 0;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: visibility 250ms ease-in-out, opacity 250ms ease-in-out;
   z-index: 5;
+  animation-name: fade-in;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 300ms;
+  transition: all 250ms;
 
   &__box {
     background-color: #000000d8;
