@@ -1,75 +1,35 @@
 <div class="authors__backdrop hidden">
   <div class="authors__modal">
-    <div class="modal__header">
-      <p class="modal__header-title">Authors</p>
+    <button class="authors__button-close">
+      <svg class="authors__icon-close">
+        <use href="/src/images/icons.svg#close"></use>
+      </svg>
+    </button>
+    <div class="authors__header">
+      <p class="authors__header-title">Authors</p>
     </div>
-    <div class="modal__content">
-      <ul class="authors__list">
-        <li class="author">
-          <figure class="">
-            <img src="/src/images/patryk.jpg" class="author__selfie" alt="author photo" />
-            <figcaption class="author__desc">
-              <p class="desc__title">DEVELOPER</p>
-              <p class="userdata">Zuza Kaźmierczak</p>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="author">
-          <figure class="">
-            <img src="/src/images/patryk.jpg" class="author__selfie" alt="author photo" />
-            <figcaption class="author__desc">
-              <p class="desc__title">Developer</p>
-              <p class="userdata">Marta Dąbrowska</p>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="author">
-          <figure class="">
-            <img src="/src/images/patryk.jpg" class="author__selfie" alt="author photo" />
-            <figcaption class="author__desc">
-              <p class="desc__title">Developer</p>
-              <p class="userdata">Dominik Danielewicz</p>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="author">
-          <figure class="">
-            <img src="/src/images/patryk.jpg" class="author__selfie" alt="author photo" />
-            <figcaption class="author__desc">
-              <p class="desc__title">Developer</p>
-              <p class="userdata">Rafał Szewczyk</p>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="author">
-          <figure class="">
-            <img src="/src/images/patryk.jpg" class="author__selfie" alt="author photo" />
-            <figcaption class="author__desc">
-              <p class="desc__title">Developer</p>
-              <p class="userdata">Paweł Rogowski</p>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="author">
-          <figure class="">
-            <img src="/src/images/patryk.jpg" class="author__selfie" alt="author photo" />
-            <figcaption class="author__desc">
-              <p class="desc__title">Developer</p>
-              <p class="userdata">Dawid Bartuś</p>
-            </figcaption>
-          </figure>
-        </li>
-        <li class="author">
-          <figure class="">
-            <img src="/src/images/patryk.jpg" class="author__selfie" alt="author photo" />
-            <figcaption class="author__desc">
-              <p class="desc__title">Developer</p>
-              <p class="userdata">Patryk Karolczak</p>
-            </figcaption>
-          </figure>
-        </li>
-      </ul>
-      <button class="modal__button">CLOSE</button>
+    <div class="authors__wrapper">
+      <div class="authors__tabs">
+        <ul class="authors__list">
+          <li class="authors__tab--active">Dominik</li>
+          <li class="authors__tab">Paweł</li>
+          <li class="authors__tab">Dawid</li>
+          <li class="authors__tab">Marta</li>
+          <li class="authors__tab">Zuza</li>
+          <li class="authors__tab">Rafał</li>
+          <li class="authors__tab">Patryk</li>
+        </ul>
+      </div>
+    </div>
+    <div class="authors__content">
+      <div class="authors__container">
+        <img class="authors__photo" src="./images/dominik.jpg" alt="no image found" loading="lazy" />
+      </div>
+      <div class="authors__info">
+        <h2 class="authors__name">Dominik Danielewicz</h2>
+        <h3 class="authors__role">Team Lead, Developer</h3>
+        <p class="authors__description">Lorem ipsum Dominik</p>
+      </div>
     </div>
   </div>
 </div>

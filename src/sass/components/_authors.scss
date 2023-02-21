@@ -31,14 +31,23 @@
     }
   }
 
-  //DOROBIC ANIMACJE CHOWANIA SIE
+  &__header {
+    @include flexbox();
+    letter-spacing: 3px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    &-title {
+      @include font(Roboto, 25px, 500, 19px, $font-color-secondary);
+    }
+  }
+
   &__modal {
+    position: relative;
     display: block;
-    //decorative
     background: white;
-    overflow-y: overlay;
     opacity: 1;
-    max-height: 95vh;
     padding: 50px 30px 40px;
 
     @include media-query(mobile) {
@@ -48,13 +57,43 @@
       max-width: 100%;
     }
     @include media-query(desktop) {
-      max-width: 100%;
+      max-width: 1024px;
     }
   }
+
+  &__button-close {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 10px;
+    right: 10px;
+    background-color: $background-color-tertiary;
+    border: none;
+    transition: transform 0.2s;
+    &:active {
+      transform: scale(0.8);
+    }
+    &:hover svg,
+    &:focus svg {
+      stroke: $accent-color;
+      stroke-width: 3px;
+      @include transition(stroke stroke-width, 0.15s, ease-in-out, 0s);
+    }
+  }
+  &__icon-close {
+    width: 32px;
+    height: 32px;
+    stroke: black;
+    stroke-width: 2px;
+    @include transition(stroke stroke-width, 0.35s, ease-in-out, 0s);
+  }
+
   &__list {
-    gap: 20px;
+    list-style: none;
+    margin-bottom: 25px;
+    gap: 5px;
     @include media-query(mobile) {
-      @include flexbox(column, wrap, center, center);
+      @include flexbox(row, wrap, center, center);
     }
     @include media-query(tablet) {
       @include flexbox(row, wrap, center, center);
@@ -62,6 +101,86 @@
     @include media-query(desktop) {
       @include flexbox(row, wrap, center, center);
     }
+  }
+
+  &__tab {
+    width: 90px;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+
+    @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
+    @include transition(transform background-color border-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+    &:active {
+      transform: scale(0.9);
+    }
+    &:hover,
+    &:focus,
+    &:focus-within {
+      background-color: $accent-color;
+      border-color: $accent-color;
+      color: $font-color-primary;
+      box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+      @include transition(background-color border-color box-shadow, 0.25s, cubic-bezier(0, 0, 1, 1), 0s);
+    }
+    &--active {
+      @extend .authors__tab;
+      background-color: $accent-color;
+      border-color: $accent-color;
+      color: $font-color-primary;
+    }
+  }
+
+  &__content {
+    gap: 20px;
+    @include media-query(mobile) {
+      @include flexbox(column, wrap, center, center);
+    }
+    @include media-query(tablet) {
+      @include flexbox(row, nowrap, flex-start, center);
+    }
+    @include media-query(desktop) {
+      @include flexbox(row, nowrap, flex-start, center);
+    }
+  }
+
+  &__photo {
+    background-color: $background-color-secondary;
+    border-radius: 5px;
+    @include media-query(mobile) {
+      height: 260px;
+    }
+    @include media-query(tablet) {
+      width: 200px;
+    }
+    @include media-query(desktop) {
+      width: 300px;
+    }
+  }
+
+  &__info {
+    @include media-query(mobile) {
+      @include flexbox(column, wrap, center, center);
+    }
+  }
+
+  &__name {
+    @include font(Roboto, 22px, 500, 23px, $font-color-secondary);
+  }
+
+  &__role {
+    margin-bottom: 20px;
+    @include font(Roboto, 18px, 400, 23px, $font-color-secondary);
+  }
+
+  &__description {
+    @include font(Roboto, 12px, 500, 20px, $font-color-secondary);
   }
 }
 
@@ -84,14 +203,6 @@
     align-items: center;
     gap: 10px;
     padding: 10px;
-  }
-
-  &__button {
-    width: 200px;
-    height: 50px;
-    margin-top: 20px;
-
-    @extend .button;
   }
 }
 
