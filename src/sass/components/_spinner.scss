@@ -45,11 +45,11 @@
     position: absolute;
     top: calc(50% - 55px);
     left: calc(50% - 55px);
-    background-color: #000000d8;
+    background-color: #00000052;
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    border: 1px rgba(0, 0, 0, 0.308) solid;
+    border: 1px rgba(0, 0, 0, 0.089) solid;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,6 +60,13 @@
     height: 80px;
     animation: rotate 1s linear infinite;
     fill: #f7e4d9;
+  }
+  &__icon--modal {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: rotate 1s linear infinite;
+    fill: #fff;
   }
 }
 .image-container {
@@ -81,7 +88,7 @@
 .spinner-modal {
   width: 100%;
   height: 100%;
-  background-color: #83919b2e;
+  background-color: #646d742e;
   z-index: 1;
   backdrop-filter: blur(3px);
   transition: backdrop-filter 100ms;
