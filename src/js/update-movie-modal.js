@@ -7,7 +7,7 @@ import {
 } from './handle-local-storage';
 import { createLibrary } from './create-library';
 import { LIBRARY_STATE, setPaginationState } from './globals';
-import { showSpinner, hideSpinner } from './spinner';
+import { showSpinner, hideSpinner, showSpinnerModal, hideSpinnerModal } from './spinner';
 
 // Select elements from the DOM
 const gallery = document.querySelector('.gallery__box'); // The gallery container
@@ -47,7 +47,7 @@ const fillMovieModalData = (id, movie, imageUrl) => {
   watchedButton.dataset.id = id;
   queueButton.dataset.id = id;
 
-  hideSpinner(); // Hide the spinner element
+  hideSpinnerModal(); // Hide the spinner element
 };
 
 // Find the "watched" and "queue" buttons in the DOM
@@ -122,7 +122,7 @@ const getButtonMovieId = button => {
 // Handles keydown events for the escape key, hiding the modal and removing the event listener
 function onEscapeKeydown(event) {
   if (event.key === 'Escape') {
-    hideSpinner();
+    hideSpinnerModal();
     modalElement.classList.add('hidden');
     document.removeEventListener('keydown', onEscapeKeydown);
   }
@@ -194,7 +194,7 @@ gallery.addEventListener('click', event => {
 // Add a click event listener to the close button of the movie modal
 modalCloseElement.addEventListener('click', event => {
   // Hide the spinner, hide the movie modal, and remove the keydown event listener for the Escape key
-  hideSpinner();
+  hideSpinnerModal();
   modalElement.classList.add('hidden');
   document.removeEventListener('keydown', onEscapeKeydown);
 

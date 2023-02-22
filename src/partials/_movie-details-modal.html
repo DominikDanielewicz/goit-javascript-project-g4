@@ -1,8 +1,15 @@
 <div class="modal-container hidden">
   <div class="modal-movie">
+    <div class="spinner-modal">
+      <div class="spinner__box-modal">
+        <svg class="spinner__icon--modal">
+          <use href="/src/images/icons.svg#spinner"></use>
+        </svg>
+      </div>
+    </div>
     <button class="modal-movie__button-close">
       <svg class="modal-movie__icon-close">
-        <use href="/src/images/icons.svg#close"></use>
+        <use href="/src/images/icons.svg#close" x="1" y="1"></use>
       </svg>
     </button>
     <div class="modal-movie__wrapper">
@@ -11,31 +18,23 @@
         <h2 class="modal-movie__title">##</h2>
         <div class="stats-list__box">
           <ul class="stats-list">
-            <li>
-              <p>Vote / Votes</p>
+            <li class="stats-list__item">
+              <p class="stats-list__item--first">Vote / Votes</p>
+              <p class="stats-list__item--second stats-list__vote-total">
+                <span class="stats-list__highlight">/</span>total votes
+              </p>
             </li>
-            <li>
-              <p>Popularity</p>
+            <li class="stats-list__item">
+              <p class="stats-list__item--first">Popularity</p>
+              <p class="stats-list__item--second stats-list__popularity-count">###</p>
             </li>
-            <li>
-              <p>Original title</p>
+            <li class="stats-list__item">
+              <p class="stats-list__item--first">Original title</p>
+              <p class="stats-list__item--second stats-list__original-title">###</p>
             </li>
-            <li>
-              <p>Genre</p>
-            </li>
-          </ul>
-          <ul class="stats-list__values">
-            <li>
-              <p class="stats-list__vote-total"><span class="stats-list__highlight">/</span>total votes</p>
-            </li>
-            <li>
-              <p class="stats-list__popularity-count">###</p>
-            </li>
-            <li>
-              <p class="stats-list__original-title">###</p>
-            </li>
-            <li>
-              <p class="stats-list__genres">###</p>
+            <li class="stats-list__item">
+              <p class="stats-list__item--first">Genre</p>
+              <p class="stats-list__item--second stats-list__genres">###</p>
             </li>
           </ul>
         </div>

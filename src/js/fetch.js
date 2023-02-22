@@ -8,7 +8,7 @@ import {
   PAGE,
   PAGINATION_STATE,
 } from './globals';
-import { showSpinner, hideSpinner } from './spinner';
+import { showSpinner, hideSpinner, showSpinnerModal } from './spinner';
 import { createButtons } from './pagination';
 import { createGallery } from './create-gallery';
 import { Notify } from 'notiflix';
@@ -18,7 +18,7 @@ import { Notify } from 'notiflix';
 // id parameter needs to be a string
 const paginationBox = document.querySelector('.pagination');
 export async function fetchMovieById(id) {
-  showSpinner();
+  showSpinnerModal();
   try {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`);
     const data = await response.json();

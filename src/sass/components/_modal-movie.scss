@@ -1,20 +1,21 @@
 .modal-movie {
+  max-height: calc(100vh - 40px);
   background-color: $background-color-tertiary;
   position: fixed;
   overflow-y: overlay;
-  max-height: 95vh;
   left: 50%;
   transform: translateX(-50%);
   width: min(1024px, 90vw);
   z-index: 1;
   @include media-query(mobile) {
-    max-width: max(100%, 280px);
+    max-width: calc(100vw - 40px);
+    min-width: 280px;
   }
   @include media-query(tablet) {
-    max-width: 100%;
+    width: 619px;
   }
   @include media-query(desktop) {
-    max-width: 1024px;
+    width: 882px;
   }
 
   &__wrapper {
@@ -38,14 +39,19 @@
     height: 32px;
     top: 10px;
     right: 10px;
-    background-color: $background-color-tertiary;
+    background-color: #ffffff;
+    border-radius: 50%;
     border: none;
     transition: transform 0.2s;
+    box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.75);
+    z-index: 1;
     &:active {
       transform: scale(0.8);
     }
     &:hover svg,
     &:focus svg {
+      cursor: pointer;
+      transform: rotate(90deg);
       stroke: $accent-color;
       stroke-width: 3px;
       @include transition(stroke stroke-width, 0.15s, ease-in-out, 0s);
@@ -62,28 +68,29 @@
     position: relative;
     background-color: $background-color-secondary;
     border-radius: 5px;
+    max-width: 319px;
     @include media-query(mobile) {
       width: max(100%, 264px);
+      max-width: 100%;
     }
     @include media-query(tablet) {
       width: 264px;
       height: 374px;
     }
     @include media-query(desktop) {
-      width: 398px;
+      max-width: 319px;
       height: 478px;
     }
   }
   &__info {
     @include flexbox(column, nowrap, flex-start, flex-start);
     gap: 20px;
-    width: max(100%, 264px);
   }
   &__title {
     @include font(Roboto, 20px, 500, 23px, $font-color-secondary);
   }
   &__buttons {
-    @include flexbox(row, nowrap, center, center);
+    @include flexbox(row, nowrap, center, normal);
     width: 100%;
     gap: 15px;
   }
@@ -94,7 +101,7 @@
     background-color: #fff;
     border: 1px solid black;
     color: $font-color-secondary;
-    width: calc(50% - 7.5px);
+    width: 100%;
   }
   &__button-add-to-queue {
     @extend .button;
@@ -103,21 +110,18 @@
     background-color: #fff;
     border: 1px solid black;
     color: $font-color-secondary;
-    width: calc(50% - 7.5px);
+    width: 100%;
   }
 }
 
 .stats-list {
   @include flexbox(column, nowrap, flex-start, flex-start);
   @include font(Roboto, 12px, 500, 16px, $font-color-alternative);
+  min-width: 67px;
   gap: 10px;
   &__values {
     @extend .stats-list;
     @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
-  }
-  & li {
-    @include flexbox(column, nowrap, flex-start, flex-start);
-    gap: 10px;
   }
   &__box {
     @include flexbox(row, nowrap, flex-start, flex-start);
@@ -128,6 +132,17 @@
     border-radius: 5px;
     padding: 1px 10px;
     color: $font-color-primary;
+  }
+  &__item {
+    display: flex;
+    flex-direction: row;
+    gap: 85px;
+    &--first {
+      min-width: 66px;
+    }
+    &--second {
+      @include font(Roboto, 12px, 500, 16px, $font-color-secondary);
+    }
   }
 }
 
@@ -140,4 +155,8 @@
   &__plot {
     @include font(Roboto, 12px, 500, 20px, $font-color-secondary);
   }
+}
+
+.overlay {
+  overflow-y: clip;
 }
