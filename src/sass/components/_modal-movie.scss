@@ -1,4 +1,5 @@
 .modal-movie {
+  max-height: calc(100vh - 40px);
   background-color: $background-color-tertiary;
   position: fixed;
   overflow-y: overlay;
@@ -154,4 +155,8 @@
   &__plot {
     @include font(Roboto, 12px, 500, 20px, $font-color-secondary);
   }
+}
+
+.overlay {
+  overflow-y: clip;
 }
