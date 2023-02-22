@@ -1,4 +1,4 @@
-import { hideSpinner, showSpinner } from './spinner';
+import { hideSpinner, showSpinner, hideSpinnerModal, showSpinnerModal } from './spinner';
 import { fetchMovieById } from './fetch';
 import { createGallery } from './create-gallery';
 import { TOTAL_PAGES, PAGE, setPaginationState, setTotalPages } from './globals';
@@ -47,6 +47,7 @@ export async function createLibrary(key, page) {
 
   // Hide spinner after creating gallery
   hideSpinner();
+  hideSpinnerModal();
 }
 
 // If current page === library page, create gallery automatically after an update
