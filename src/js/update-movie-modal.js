@@ -128,11 +128,9 @@ function onEscapeKeydown(event) {
 
 // Handle the click event on the gallery
 function handleGalleryClick(event) {
-
   // Find closest ancestor element with class 'card'
   const target = event.target.closest('.card');
   if (target) {
-
     // Get unique ID of clicked card
     const id = target.dataset.id;
 
@@ -144,7 +142,6 @@ function handleGalleryClick(event) {
 
     // Fetch extra movie data using unique ID
     fetchMovieById(id).then(movie => {
-
       // Populate modal with fetched data
       fillMovieModalData(id, movie, posterUrl);
     });
@@ -163,7 +160,6 @@ function handleGalleryClick(event) {
 
 // Add click event listener to gallery element
 gallery.addEventListener('click', event => {
-
   // Find closest parent element with class 'card' from clicked element
   const target = event.target.closest('.card');
 
@@ -199,7 +195,6 @@ gallery.addEventListener('click', event => {
 
 // Add click event listener to the modal close button
 modalCloseElement.addEventListener('click', event => {
-
   // Hide spinner and modal and remove keydown event listener
   hideSpinnerModal();
   modalElement.classList.add('hidden');
