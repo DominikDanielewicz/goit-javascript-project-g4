@@ -11,43 +11,36 @@ const authors = [
     name: 'Zuza Kaźmierczak',
     photo: zuzaimage,
     role: 'Developer',
-    description: 'Lorem ipsum Zuza',
   },
   {
     name: 'Marta Dąbrowska',
     photo: martaimage,
     role: 'Developer',
-    description: 'Lorem ipsum Marta',
   },
   {
     name: 'Dominik Danielewicz',
     photo: dominikimage,
     role: 'Team Lead, Developer',
-    description: 'Lorem ipsum Dominik',
   },
   {
     name: 'Paweł Rogowski',
     photo: pawelimage,
     role: 'Manual Tester, Developer',
-    description: 'Lorem ipsum Paweł',
   },
   {
     name: 'Dawid Bartuś',
     photo: dawidimage,
     role: 'Scrum Master, Developer',
-    description: 'Lorem ipsum Dawid',
   },
   {
     name: 'Rafał Szewczyk',
     photo: rafalimage,
     role: 'Developer',
-    description: 'Lorem ipsum Rafał',
   },
   {
     name: 'Patryk Karolczak',
     photo: patrykimage,
     role: 'Developer',
-    description: 'Lorem ipsum Patryk',
   },
 ];
 
@@ -63,7 +56,6 @@ const authorsButtons = document.querySelector('.authors__list');
 const authorsPhoto = document.querySelector('.authors__photo');
 const authorsName = document.querySelector('.authors__name');
 const authorsRole = document.querySelector('.authors__role');
-const authorsDescription = document.querySelector('.authors__description');
 const authorsTabs = Array.from(authorsButtons.children);
 
 authorsButtons.addEventListener('click', selectAuthor);
@@ -80,11 +72,10 @@ function selectAuthor(e) {
 
   e.target.classList.add('authors__tab--active');
 
-  for (const { name, photo, role, description } of authors) {
+  for (const { name, photo, role } of authors) {
     if (name.includes(e.target.innerText)) {
       authorsName.textContent = name;
       authorsRole.textContent = role;
-      authorsDescription.textContent = description;
       authorsPhoto.src = photo;
     }
   }
