@@ -51,9 +51,10 @@ const authors = [
   },
 ];
 
-//backdrop and modal window
+// Backdrop and modal window
 const backdrop = document.querySelector('.authors__backdrop');
-//button to open modal window
+
+// Button to open modal window
 const authorButton = document.querySelector('.students-link');
 const modalButton = document.querySelector('.authors__button-close');
 

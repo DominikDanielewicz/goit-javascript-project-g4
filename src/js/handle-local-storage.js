@@ -1,4 +1,4 @@
-// This function adds a movie ID to the 'watched' array in localStorage
+// Add movie ID to the 'watched' array in localStorage
 export const addMovieToWatched = id => {
   const watched = JSON.parse(localStorage.getItem('watched')) || []; // Get the 'watched' array from localStorage or create a new one
   if (!watched.includes(id)) {
@@ -8,7 +8,7 @@ export const addMovieToWatched = id => {
   }
 };
 
-// This function adds a movie ID to the 'queue' array in localStorage
+// Add movie ID to the 'queue' array in localStorage
 export const addMovieToQueue = id => {
   const queue = JSON.parse(localStorage.getItem('queue')) || []; // Get the 'queue' array from localStorage or create a new one
   if (!queue.includes(id)) {
@@ -18,7 +18,7 @@ export const addMovieToQueue = id => {
   }
 };
 
-// This function removes a movie ID from the 'watched' array in localStorage
+// Remove movie ID from the 'watched' array in localStorage
 export const removeMovieFromWatched = id => {
   let watched = JSON.parse(localStorage.getItem('watched')) || []; // Get the 'watched' array from localStorage or create a new one
   if (watched.includes(id)) {
@@ -28,7 +28,7 @@ export const removeMovieFromWatched = id => {
   }
 };
 
-// This function removes a movie ID from the 'queue' array in localStorage
+// Remove movie ID from the 'queue' array in localStorage
 export const removeMovieFromQueue = id => {
   let queue = JSON.parse(localStorage.getItem('queue')) || []; // Get the 'queue' array from localStorage or create a new one
   if (queue.includes(id)) {

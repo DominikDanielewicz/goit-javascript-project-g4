@@ -7,21 +7,19 @@ import {
 } from './handle-local-storage';
 import { createLibrary } from './create-library';
 import { LIBRARY_STATE, setPaginationState } from './globals';
-import { showSpinner, hideSpinner, showSpinnerModal, hideSpinnerModal } from './spinner';
+import { hideSpinnerModal } from './spinner';
 
 // Select elements from the DOM
-const gallery = document.querySelector('.gallery__box'); // The gallery container
-const partToFill = document.querySelector('.modal-movie__wrapper'); // The container for the movie modal
-const modalElement = document.querySelector('.modal-container'); // The modal container
-const modalCloseElement = document.querySelector('.modal-movie__button-close'); // The close button for the modal
-const modalImage = modalElement.querySelector('.modal-movie__movie-poster'); // The image element for the movie poster
-const baseURL = 'http://image.tmdb.org/t/p/w500'; // The base URL for the TMDB API image URLs
+const gallery = document.querySelector('.gallery__box');
+const modalElement = document.querySelector('.modal-container');
+const modalCloseElement = document.querySelector('.modal-movie__button-close');
+const modalImage = modalElement.querySelector('.modal-movie__movie-poster');
 
-// Function to fill the movie modal with data
+// Fill modal with data
 const fillMovieModalData = (id, movie, imageUrl) => {
-  const genres = movie.genres.map(genre => genre.name).join(', '); // Join the movie genres into a string
+  const genres = movie.genres.map(genre => genre.name).join(', ');
 
-  // Select the elements in the modal to update with movie data
+  // Select elements in the modal to update with movie data
   const poster = modalElement.querySelector('.modal-movie__movie-poster');
   const title = modalElement.querySelector('.modal-movie__title');
   const voteHighlight = modalElement.querySelector('.stats-list__highlight');
@@ -33,7 +31,7 @@ const fillMovieModalData = (id, movie, imageUrl) => {
   const watchedButton = modalElement.querySelector('.modal-movie__button-add-to-watched');
   const queueButton = modalElement.querySelector('.modal-movie__button-add-to-queue');
 
-  // Update the poster image URL and text content for other elements
+  // Update poster image URL and text content for other elements
   poster.src = imageUrl;
   title.textContent = movie.title;
   voteHighlight.textContent = movie.vote_average;
@@ -47,28 +45,28 @@ const fillMovieModalData = (id, movie, imageUrl) => {
   watchedButton.dataset.id = id;
   queueButton.dataset.id = id;
 
-  hideSpinnerModal(); // Hide the spinner element
+  hideSpinnerModal();
 };
 
-// Find the "watched" and "queue" buttons in the DOM
+// Find "watched" and "queue" buttons in the DOM
 const watchedButton = document.querySelector('.modal-movie__button-add-to-watched');
 const queueButton = document.querySelector('.modal-movie__button-add-to-queue');
 
-// Returns true if the movie with the given id is in the "watched" array in local storage
+// Return true if movie with given ID is in "watched" array in local storage
 const isMovieInWatched = id => {
   const watched = JSON.parse(localStorage.getItem('watched')) || [];
   return watched.includes(id);
 };
 
-// Returns true if the movie with the given id is in the "queue" array in local storage
+// Return true if movie with given ID is in  "queue" array in local storage
 const isMovieInQueue = id => {
   const queue = JSON.parse(localStorage.getItem('queue')) || [];
   return queue.includes(id);
 };
 
-// Toggles the text of a button between four different states
+// Toggle button text between four states
 function toggleButtonText(button) {
-  // Four states: "ADD TO WATCHED", "REMOVE FROM WATCHED", "ADD TO QUEUE", "REMOVE FROM QUEUE"
+  // Four possible states: "ADD TO WATCHED", "REMOVE FROM WATCHED", "ADD TO QUEUE", "REMOVE FROM QUEUE"
   if (button.innerText === 'ADD TO WATCHED') {
     button.innerText = 'REMOVE FROM WATCHED';
   } else if (button.innerText === 'REMOVE FROM WATCHED') {
@@ -80,7 +78,7 @@ function toggleButtonText(button) {
   }
 }
 
-// Add a click event listener to the "watched" button, and update the library and pagination state as needed
+// Add click event listener to the "watched" button, and update library and pagination state as needed
 watchedButton.addEventListener('click', function () {
   if (isMovieInWatched(getButtonMovieId(watchedButton))) {
     removeMovieFromWatched(getButtonMovieId(watchedButton));
@@ -90,14 +88,14 @@ watchedButton.addEventListener('click', function () {
     toggleButtonText(watchedButton);
   }
 
-  // Update the library and pagination state if the user is on the library page and viewing the "watched" list
+  // Update library and pagination state if the user is on the library page && viewing the "watched" list
   if (window.location.pathname.indexOf('library.html') !== -1 && LIBRARY_STATE === 'watched') {
     createLibrary('watched', 1);
     setPaginationState('watched');
   }
 });
 
-// Add a click event listener to the "queue" button, and update the library and pagination state as needed
+// Add click event listener to the "queue" button and update the library and pagination state as needed
 queueButton.addEventListener('click', function () {
   if (isMovieInQueue(getButtonMovieId(queueButton))) {
     removeMovieFromQueue(getButtonMovieId(queueButton));
@@ -107,19 +105,19 @@ queueButton.addEventListener('click', function () {
     toggleButtonText(queueButton);
   }
 
-  // Update the library and pagination state if the user is on the library page and viewing the "queue" list
+  // Update library and pagination state if the user is on the library page && viewing the "queue" list
   if (window.location.pathname.indexOf('library.html') !== -1 && LIBRARY_STATE === 'queue') {
     createLibrary('queue', 1);
     setPaginationState('queue');
   }
 });
 
-// Get the value of the "data-id" attribute of a button element
+// Get value of button "data-id" attribute
 const getButtonMovieId = button => {
   return button.dataset.id;
 };
 
-// Handles keydown events for the escape key, hiding the modal and removing the event listener
+// Handle ESCAPE keydown event
 function onEscapeKeydown(event) {
   if (event.key === 'Escape') {
     hideSpinnerModal();
@@ -128,40 +126,48 @@ function onEscapeKeydown(event) {
   }
 }
 
-// This function handles the click event on the gallery
+// Handle the click event on the gallery
 function handleGalleryClick(event) {
-  // Find the closest ancestor element with the class 'card'
+
+  // Find closest ancestor element with class 'card'
   const target = event.target.closest('.card');
   if (target) {
-    // Get the unique identifier of the clicked card
+
+    // Get unique ID of clicked card
     const id = target.dataset.id;
 
-    // Get the URL of the clicked image
+    // Get URL of clicked image
     const posterUrl = target.querySelector('.card__image').getAttribute('src');
-    // Set the poster URL as the source of the modal image
+
+    // Set poster URL as the source of the modal image
     modalImage.setAttribute('src', posterUrl);
 
-    // Fetch additional movie data using the unique identifier
+    // Fetch extra movie data using unique ID
     fetchMovieById(id).then(movie => {
-      // Populate the movie modal with fetched data
+
+      // Populate modal with fetched data
       fillMovieModalData(id, movie, posterUrl);
     });
 
-    // Display the modal
+    // Show modal
     modalElement.classList.remove('hidden');
-    // Listen for the Escape key to close the modal
+
+    // Add ESCAPE keydown event
+
     document.addEventListener('keydown', onEscapeKeydown);
-    // Remove the event listener for gallery clicks to prevent further clicks during modal display
+
+    // Remove event listener for gallery clicks to prevent further clicks during modal display
     gallery.removeEventListener('click', handleGalleryClick);
   }
 }
 
-// Add a click event listener to the gallery element
+// Add click event listener to gallery element
 gallery.addEventListener('click', event => {
-  // Find the closest parent element with the class 'card' from the clicked element
+
+  // Find closest parent element with class 'card' from clicked element
   const target = event.target.closest('.card');
 
-  // If a 'card' element was found, get its ID and poster URL, and update the movie modal with its data
+  // If a 'card' element was found, get its ID and poster URL and update modal with data
   if (target) {
     const id = target.dataset.id;
     const posterUrl = target.querySelector('.card__image').getAttribute('src');
@@ -169,7 +175,7 @@ gallery.addEventListener('click', event => {
     fetchMovieById(id).then(movie => {
       fillMovieModalData(id, movie, posterUrl);
 
-      // Update the text of the watched and queue buttons based on whether the movie is already in the respective list
+      // Update the watched and queue buttons text based on whether the movie is already on the respective list
       if (isMovieInWatched(getButtonMovieId(watchedButton))) {
         watchedButton.innerHTML = 'REMOVE FROM WATCHED';
       } else {
@@ -182,22 +188,23 @@ gallery.addEventListener('click', event => {
       }
     });
 
-    // Show the movie modal and add a keydown event listener for the Escape key
+    // Show modal and add ESCAPE keydown event
     modalElement.classList.remove('hidden');
     document.addEventListener('keydown', onEscapeKeydown);
 
-    // Remove the click event listener from the gallery element to prevent further clicks
+    // Remove click event listener from gallery element to prevent further clicks
     gallery.removeEventListener('click', handleGalleryClick);
   }
 });
 
-// Add a click event listener to the close button of the movie modal
+// Add click event listener to the modal close button
 modalCloseElement.addEventListener('click', event => {
-  // Hide the spinner, hide the movie modal, and remove the keydown event listener for the Escape key
+
+  // Hide spinner and modal and remove keydown event listener
   hideSpinnerModal();
   modalElement.classList.add('hidden');
   document.removeEventListener('keydown', onEscapeKeydown);
 
-  // Add back the click event listener to the gallery element to allow further clicks
+  // Add click event listener again to gallery element to allow further clicks
   gallery.addEventListener('click', handleGalleryClick);
 });
