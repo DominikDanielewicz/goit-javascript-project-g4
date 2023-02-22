@@ -16,11 +16,9 @@ const throttledFetch = throttle(async query => {
   // Clear pagination and gallery boxes and show the spinner
   paginationBox.innerHTML = '';
   galleryBox.innerHTML = '';
-  showSpinner();
 
   // Fetch data for the given query and create the gallery
   const data = await fetchQuery(query, 1);
-  hideSpinner();
   createGallery(data);
 }, 500);
 
