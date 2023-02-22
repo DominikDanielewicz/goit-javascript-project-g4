@@ -24,7 +24,7 @@ export async function createLibrary(key, page) {
   // Get array of movie IDs to fetch
   const idsToFetch = movieIds.slice(startIndex, startIndex + moviesPerPage);
 
-  // Fetch information using retrieved movie IDs
+  // Fetch information using retrieved movie IDs````
   const movies = await Promise.all(idsToFetch.map(fetchMovieById));
 
   // Set pagination data
