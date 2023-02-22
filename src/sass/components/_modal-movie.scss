@@ -75,11 +75,9 @@
     }
     @include media-query(tablet) {
       width: 264px;
-      height: 374px;
     }
     @include media-query(desktop) {
       max-width: 319px;
-      height: 478px;
     }
   }
   &__info {
