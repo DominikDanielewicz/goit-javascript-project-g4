@@ -1,16 +1,16 @@
 export { showSpinner, hideSpinner, showSpinnerModal, hideSpinnerModal };
 
-// specify element to edit
+// Specify element to edit
 const spinner = document.querySelector('.spinner');
 const spinnerModal = document.querySelector('.spinner-modal');
 const modalMovie = document.querySelector('.modal-movie');
 
-// showing spinner element by removing .hidden class
+// Show spinner
 const showSpinner = () => {
   spinner.classList.remove('hidden');
 };
 
-// hide spinner element by removing .hidden class
+// Hide spinner
 const hideSpinner = () => {
   spinner.classList.add('hidden');
 };

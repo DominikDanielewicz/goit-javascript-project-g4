@@ -5,7 +5,7 @@ import { setPaginationState } from './globals';
 import { Notify } from 'notiflix';
 import { hideSpinner, showSpinner } from './spinner';
 
-// Get necessary elements from the DOM
+// Get elements from the DOM
 const searchForm = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-form__input');
 const galleryBox = document.querySelector('.gallery__box');
@@ -13,12 +13,12 @@ const paginationBox = document.querySelector('.pagination');
 
 // Create a throttled version of the fetch function
 const throttledFetch = throttle(async query => {
-  // Clear the pagination and gallery boxes, and show the spinner
+  // Clear pagination and gallery boxes and show the spinner
   paginationBox.innerHTML = '';
   galleryBox.innerHTML = '';
   showSpinner();
 
-  // Fetch the data for the given query and create the gallery
+  // Fetch data for the given query and create the gallery
   const data = await fetchQuery(query, 1);
   hideSpinner();
   createGallery(data);
@@ -39,7 +39,7 @@ searchForm.addEventListener('submit', event => {
     return;
   }
 
-  // Set the pagination state and fetch the data for the query
+  // Set pagination state and fetch data for the query
   setPaginationState('search');
   throttledFetch(query);
 });

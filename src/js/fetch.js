@@ -2,20 +2,20 @@ import {
   APIKEY,
   setPage,
   setTotalPages,
-  setPaginationState,
   setLastQuery,
   TOTAL_PAGES,
   PAGE,
-  PAGINATION_STATE,
 } from './globals';
+
 import { showSpinner, hideSpinner, showSpinnerModal } from './spinner';
 import { createButtons } from './pagination';
 import { createGallery } from './create-gallery';
 import { Notify } from 'notiflix';
 
-// Function to call the API by movie ID and get a reponse with details
-// returns an object with details - genres are already resolved
-// id parameter needs to be a string
+// Call API by movie ID and get a response with details
+// Return an object with details - genres are already resolved
+// ID parameter must be a string
+
 const paginationBox = document.querySelector('.pagination');
 export async function fetchMovieById(id) {
   showSpinnerModal();
@@ -64,8 +64,8 @@ export async function fetchTrending(page) {
   }
 }
 
-// fetches movie data based on query and page number
-// returns an array of objects with movie data based on a query
+// Fetch movie data based on query and page number
+// Return an array of objects with movie data based on a query
 export async function fetchQuery(query, page) {
   try {
     showSpinner();
@@ -92,7 +92,7 @@ export async function fetchQuery(query, page) {
     // Set totalResults variable
     const totalResults = data.total_results;
     if (totalResults < 1) {
-      Notify.failure(`Sorry, no movie found matching your search`, {
+      Notify.failure(`Sorry, there are no movies matching your search`, {
         position: 'center-top',
       });
       fetchTrending(1).then(data => {
